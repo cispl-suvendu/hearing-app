@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cream:#F9F1F0;
+  --roseQuartz:#FADCD9;
+  --dustyRose:#F8AFA6;
+  --coral:#F79489;
+  --dark:#0a0a0a;
+  --light:#ffffff;
+  --skyLight:#f5f7ff;
+  --primaryDark:#4b49ac;
+  --primaryLight:#98bdff;
+  --supportingSky:#7da0fa;
+  --supportingMegenda:#7978e9;
+  --supprtingCoral:#f3797e;
+  --grayText:#6C7383;
+}
+
+body {
+  font-family: var(--font-geist-sans);
+}
+
+.site-logo a{
+  @apply flex items-center gap-2
+}
+
+.site-logo .logo-icon{
+  @apply text-4xl text-primaryDark animate-spin-slow
+}
+
+.site-logo h1{
+  @apply font-bold font-mono text-primaryDark text-xl
+}
+
+.menuTigger{
+  @apply text-2xl text-grayText cursor-pointer
+}
+
+.mainNavigation{
+  @apply list-none m-0 p-0 flex flex-col gap-6
+}
+
+.mainNavigation li{
+  @apply m-0 p-0
+}
+
+.mainNavigation li a{
+  @apply flex items-center justify-start gap-2 text-grayText transition-all
+}
+
+.mainNavigation li a:hover{
+  @apply text-primaryDark
+}
+
+.mainNavigation li a.active{
+  @apply text-primaryDark
+}
+
+.btnPrimary{
+  @apply bg-supportingMegenda text-white px-5 py-2 rounded-md
+}
+
+.btnClose{
+  @apply bg-grayText text-white px-5 py-2 rounded-md
+}
+
+.inputStyle{
+  @apply border rounded-md px-2 py-2 text-sm text-grayText w-full
+}
+
+.errorMsg{
+  @apply text-red-600 text-[12px] mt-1
+}
+
+.lblHldr label {
+  @apply text-sm text-grayText
+}
+
+.skeleton{
+  width: 100%;
+  height:100px;
+   background: #eee;
+    background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+    border-radius: 5px;
+    background-size: 200% 100%;
+    animation: 1.5s skeletonShine linear infinite;
+}
+
+@keyframes skeletonShine {
+  to {
+    background-position-x: -200%;
+  }
+}

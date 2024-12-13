@@ -1,0 +1,25 @@
+"use server";
+
+export async function getDataById(
+  pathName: string, 
+  param: string, 
+  id: string, 
+  tag?: string
+) {
+  const url = `${process.env.NEXT_API_URL}/api/${pathName}?${param}=${id}`;
+  const options: RequestInit = {
+    next: tag ? { tags: [tag] } : undefined,
+  };
+
+  const data = await fetch(url, options);
+  if (!data.ok) {
+    throw new Error(`Failed to fetch data: ${data.status} ${data.statusText}`);
+  }
+
+  const response = await data.json();
+//   if (!response) {
+//     throw new Error("No data found!");
+//   }
+
+  return response;
+}

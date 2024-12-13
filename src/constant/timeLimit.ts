@@ -1,0 +1,1 @@
+export const timeLimit = [20, 40, 60, 80, 100, 180]
