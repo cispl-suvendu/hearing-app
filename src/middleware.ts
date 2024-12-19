@@ -11,7 +11,9 @@ const apiRoutes = ["/api/category", "/api/exam", "/api/examAssignment", "/api/qu
 
 export async function middleware(req: NextRequest) {
     const cookieStore = await cookies();
-    const token = cookieStore.get("token")?.value; // Get the token from the cookie
+    const token = cookieStore.get("login_token")?.value; // Get the token from the cookie
+
+    console.log('cookieStore', cookieStore)
 
     const url = req.nextUrl.clone();
     const { pathname } = url;
