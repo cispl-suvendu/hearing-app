@@ -7,7 +7,7 @@ import { postAllData } from '@/lib/postAll';
 import toast from 'react-hot-toast';
 import { signInInitialValues, signInType, signInValidation } from '@/formData/signIn';
 import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
+import { handleSignIn } from '@/lib/handleSignIn';
 
 export default function SignIn() {
 
@@ -22,20 +22,17 @@ export default function SignIn() {
     })
 
     const handleSubmit = async (values: signInType) => {
-        const { success, message, error, data } = await postAllData('signin', values)
+        const response = await handleSignIn(values)
+        const { success, message, error } = response
         if (success) {
             formik.resetForm()
             toast.success(message);
             router.replace('/dashboard')
-            //Cookies.set('token', data.token, { expires: 7, path: '' })
         }
         if (!success) {
             toast.error(error);
         }
-        console.log(success, message, error, data)
     }
-
-    
 
     return (
         <div>

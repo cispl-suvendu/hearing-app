@@ -1,4 +1,5 @@
 "use server";
+import { cookies } from "next/headers";
 
 interface GetAllDataProps {
   pathName: string;
@@ -18,6 +19,8 @@ export async function getAllData(
   }: GetAllDataProps
 ) {
   // Base URL
+  const cookieStore = await cookies();
+  const loginToken = cookieStore.get("login_token")?.value;
   const url = `${process.env.NEXT_API_URL}/api/${pathName}`;
 
   // Conditionally construct query parameters
@@ -31,6 +34,10 @@ export async function getAllData(
 
   try {
     const data = await fetch(fullUrl, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${loginToken}`, // Add the token to Authorization header
+      },
       next: tag ? { tags: [tag] } : undefined,
     });
 

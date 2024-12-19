@@ -11,21 +11,18 @@ const apiRoutes = ["/api/category", "/api/exam", "/api/examAssignment", "/api/qu
 
 export async function middleware(req: NextRequest) {
     const cookieStore = await cookies();
-    const token = cookieStore.get("login_token")?.value; // Get the token from the cookie
-
-    console.log('cookieStore', cookieStore)
+    const token = cookieStore.get("login_token")?.value || req.headers.get("Authorization")?.split(" ")[1];
 
     const url = req.nextUrl.clone();
     const { pathname } = url;
 
-    console.log("Current pathname:", pathname, 'token', token); // Log the pathname for debugging
+    //console.log("Current pathname:", pathname, 'token', token);
 
     // Redirect '/' based on login status
     if (pathname === "/") {
         if (token) {
             try {
                 const { payload } = await jwtVerify(token, new TextEncoder().encode(SECRET_KEY)); // Use jose to verify the JWT
-                console.log("JWT payload:", payload); // Log the details of the token
                 url.pathname = "/dashboard"; // Redirect logged-in user
                 return NextResponse.redirect(url);
             } catch (error) {
@@ -67,7 +64,7 @@ export async function middleware(req: NextRequest) {
         }
 
         try {
-            await jwtVerify(token, new TextEncoder().encode(SECRET_KEY)); // Verify token with jose
+            await jwtVerify(token, new TextEncoder().encode(SECRET_KEY));
             return NextResponse.next();
         } catch {
             return new NextResponse("Unauthorized token", { status: 401 });
@@ -78,6 +75,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
 }
 
+
 export const config = {
-    matcher: ['/', '/((?!api|static|_next|favicon.ico).*)'],
+    matcher: ['/', '/((?!api|static|_next|favicon.ico).*)', '/api/:path*'],
 };

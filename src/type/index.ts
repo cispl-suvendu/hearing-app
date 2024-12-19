@@ -121,3 +121,9 @@ export interface PageProps {
     limit?: string
   }>;
 }
+
+export interface LoginUser {
+  id:string,
+  name:string,
+  email:string
+}
