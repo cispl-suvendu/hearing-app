@@ -15,12 +15,6 @@ interface StatisticsProps {
 }
 
 export default function Statistics({ allCat, allQuestions, allExam, allSubCat }: StatisticsProps) {
-
-  useEffect(() => {
-    localStorage.setItem('allCategory', JSON.stringify(allCat))
-    localStorage.setItem('allSubCategory', JSON.stringify(allSubCat))
-  }, [])
-
   return (
     <div className="flex gap-6 flex-wrap">
       <AnimatedCount title="category" Icon={<TbBrandCodecov />} total={allCat.length} link="/categories" />

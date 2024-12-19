@@ -31,7 +31,7 @@ export default async function ExamPage({ searchParams }: PageProps) {
     return (
       <>
         <ExamHeader />
-        <NoItemFound componentName='Category' />
+        <NoItemFound componentName='Exam' />
       </>
     )
   }

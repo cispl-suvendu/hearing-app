@@ -35,7 +35,7 @@ export default async function Questionnaire({ searchParams }: PageProps) {
     return (
       <>
         <QuestionHeader />
-        <NoItemFound componentName='Category' />
+        <NoItemFound componentName='Questionnaires' />
       </>
     )
   }
