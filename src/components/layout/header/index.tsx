@@ -59,19 +59,19 @@ export default function Header({ handleNavChange, activeNav }: HeaderProps) {
                             className="w-52 origin-top-right bg-white z-[100] text-grayText p-4 rounded flex flex-col gap-4"
                         >
                             <MenuItem>
-                                <div className='flex items-center cursor-pointer text-sm gap-2' onClick={() => signOut()}>
-                                    <div>
-                                        <IoMdLogOut />
-                                    </div>
-                                    <div>Logout</div>
-                                </div>
-                            </MenuItem>
-                            <MenuItem>
                                 <div className='flex items-center cursor-pointer text-sm gap-2' onClick={() => router.replace('/user')}>
                                     <div>
                                         <AiOutlineUsergroupAdd />
                                     </div>
                                     <div>Admin User</div>
+                                </div>
+                            </MenuItem>
+                            <MenuItem>
+                                <div className='flex items-center cursor-pointer text-sm gap-2' onClick={() => signOut()}>
+                                    <div>
+                                        <IoMdLogOut />
+                                    </div>
+                                    <div>Logout</div>
                                 </div>
                             </MenuItem>
                         </MenuItems>
