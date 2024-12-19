@@ -80,8 +80,8 @@ export async function POST(request: Request) {
         // });
 
         cookieStore.set({
-            name: 'name',
-            value: 'lee',
+            name: 'token',
+            value: token,
             httpOnly: true,
             path: '/',
           })
