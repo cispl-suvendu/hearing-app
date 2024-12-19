@@ -6,10 +6,14 @@ import { questionInitialValues, questionValidation, questionType } from '@/formD
 import { ICategory, ISubcategory } from '@/type';
 import { useAuthContext } from '@/context/authContext';
 
-export default function AddQuestion() {
+interface AddQuestionProps {
+    categories:ICategory[],
+    subCategories:ISubcategory[]
+}
+
+export default function AddQuestion({categories, subCategories}:AddQuestionProps) {
     const {user} = useAuthContext()
-    const [categories, setCategories] = useState([]);
-    const [subCategories, setSubCategories] = useState([]);
+
     const formik = useFormik({
         initialValues: questionInitialValues,
         validationSchema: questionValidation,
@@ -42,16 +46,6 @@ export default function AddQuestion() {
             toast.error(error);
         }
     };
-
-    useEffect(() => {
-        const allCat = localStorage.getItem("allCategory");
-        const allSubCat = localStorage.getItem("allSubCategory");
-
-        setCategories(allCat ? JSON.parse(allCat) : []);
-        setSubCategories(allSubCat ? JSON.parse(allSubCat) : []);
-    }, [])
-
-
 
     const subCategoryById = formik.values.categoryId ? subCategories.filter((cat: ISubcategory) => cat.categoryId._id as unknown as string === formik.values.categoryId) : subCategories
 

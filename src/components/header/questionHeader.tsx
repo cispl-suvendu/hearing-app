@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddQuestion from '../form/addQuestion'
 import { GrDocumentCsv } from "react-icons/gr";
 import Link from 'next/link'
@@ -7,13 +7,15 @@ import { getAllData } from '@/lib/getAll';
 
 export default function QuestionHeader() {
 
+    const [categories, setCategories] = useState([]);
+    const [subCategories, setSubCategories] = useState([]);
     const csvLink = '/questionnaires/sample-question.csv';
 
     const getAllItesm = async () => {
         const { data: allCat } = await getAllData({ pathName: 'category', tag: 'allCat', limit: 1000 })
         const { data: allSubCat } = await getAllData({ pathName: 'subCategory', tag: 'allSubCat', limit: 1000 })
-        localStorage.setItem('allCategory', JSON.stringify(allCat))
-        localStorage.setItem('allSubCategory', JSON.stringify(allSubCat))
+        setCategories(allCat);
+        setSubCategories(allSubCat);
     }
 
     useEffect(() => {
@@ -27,7 +29,7 @@ export default function QuestionHeader() {
                 <Link href={csvLink} className='text-xs text-green-600 cursor-pointer flex items-center gap-1' download><GrDocumentCsv />
                     (Sample CSV)</Link>
             </div>
-            <AddQuestion />
+            <AddQuestion categories={categories} subCategories={subCategories}  />
         </div>
     )
 }

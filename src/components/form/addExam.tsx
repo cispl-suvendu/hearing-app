@@ -10,12 +10,15 @@ import { numQuestions } from '@/constant/numQuestions';
 import { difficultyLevel } from '@/constant/difficulty';
 import { useAuthContext } from '@/context/authContext';
 
-export default function AddExam() {
+interface ExamInterface {
+    categories:ICategory[],
+    subCategories:ISubcategory[]
+}
 
-    const {user} = useAuthContext()
+export default function AddExam({categories, subCategories}:ExamInterface) {
     
-    const [categories, setCategories] = useState([]);
-    const [subCategories, setSubCategories] = useState([]);
+    const { user } = useAuthContext()
+
     const formik = useFormik({
         initialValues: examInitialValues,
         validationSchema: examValidation,
@@ -46,14 +49,6 @@ export default function AddExam() {
             toast.error(error);
         }
     };
-
-    useEffect(() => {
-        const allCat = localStorage.getItem("allCategory");
-        const allSubCat = localStorage.getItem("allSubCategory");
-
-        setCategories(allCat ? JSON.parse(allCat) : []);
-        setSubCategories(allSubCat ? JSON.parse(allSubCat) : []);
-    }, [])
 
     const subCategoryById = formik.values.categoryId ? subCategories.filter((cat: ISubcategory) => cat.categoryId._id as unknown as string === formik.values.categoryId) : subCategories
 
