@@ -4,8 +4,10 @@ import { postAllData } from '@/lib/postAll';
 import toast from 'react-hot-toast';
 import { questionInitialValues, questionValidation, questionType } from '@/formData/question';
 import { ICategory, ISubcategory } from '@/type';
+import { useAuthContext } from '@/context/authContext';
 
 export default function AddQuestion() {
+    const {user} = useAuthContext()
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
     const formik = useFormik({
@@ -23,7 +25,7 @@ export default function AddQuestion() {
         const formData = new FormData();
         formData.append('categoryId', categoryId);
         formData.append('subcategoryId', subcategoryId);
-        formData.append('createdBy', '6720cb43966bb22e30a741e2');
+        formData.append('createdBy', user?.id);
         if (file) {
             formData.append('file', file);
         }

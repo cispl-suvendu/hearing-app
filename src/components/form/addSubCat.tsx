@@ -17,7 +17,6 @@ interface AddSubCatProps {
 }
 
 export default function AddSubCat({ catId, createdBy, reFetch, closeAddForm }: AddSubCatProps) {
-
     const formik = useFormik({
         initialValues: subCatInitialValues,
         validationSchema: subCatValidation,

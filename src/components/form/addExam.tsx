@@ -8,8 +8,11 @@ import { ICategory, ISubcategory } from '@/type';
 import { timeLimit } from '@/constant/timeLimit';
 import { numQuestions } from '@/constant/numQuestions';
 import { difficultyLevel } from '@/constant/difficulty';
+import { useAuthContext } from '@/context/authContext';
 
 export default function AddExam() {
+
+    const {user} = useAuthContext()
     
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
@@ -25,7 +28,7 @@ export default function AddExam() {
 
         const payload = {
             ...values,
-            createdBy: '6720cb43966bb22e30a741e2'
+            createdBy: user?.id
         }
 
         const { success, message, error } = await postAllData('exam', payload, 'allExam');

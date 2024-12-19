@@ -4,6 +4,7 @@ import MainNavigation from './navigation'
 import MainContent from './content'
 import Header from './header'
 import { Toaster } from 'react-hot-toast';
+import { AuthContextProvider } from '@/context/authContext'
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
     const [activeNav, setActiveNav] = useState<boolean>(true)
@@ -11,13 +12,15 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         setActiveNav(prev => !prev)
     }
     return (
-        <div className='main-site'>
-            <Header handleNavChange={handleNavChange} activeNav={activeNav} />
-            <div className='flex'>
-                <MainNavigation activeNav={activeNav}  />
-                <MainContent activeNav={activeNav}>{children}</MainContent>
+        <AuthContextProvider>
+            <div className='main-site'>
+                <Header handleNavChange={handleNavChange} activeNav={activeNav} />
+                <div className='flex'>
+                    <MainNavigation activeNav={activeNav} />
+                    <MainContent activeNav={activeNav}>{children}</MainContent>
+                </div>
+                <Toaster />
             </div>
-            <Toaster/>
-        </div>
+        </AuthContextProvider>
     )
 }

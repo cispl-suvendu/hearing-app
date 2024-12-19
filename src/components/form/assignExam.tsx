@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import { postAllData } from '@/lib/postAll';
 import toast from 'react-hot-toast';
 import { assignExamInitialValues, assignExamType, assignExamValidation } from '@/formData/assignExam';
+import { useAuthContext } from '@/context/authContext';
 
 interface AssignExamProps {
     exam: IExam,
@@ -13,7 +14,7 @@ interface AssignExamProps {
 }
 
 export default function AssignExam({ exam, reFetch, closeAddForm }: AssignExamProps) {
-
+    const {user} = useAuthContext()
     const formik = useFormik({
         initialValues: assignExamInitialValues,
         validationSchema: assignExamValidation,
@@ -26,7 +27,7 @@ export default function AssignExam({ exam, reFetch, closeAddForm }: AssignExamPr
         const payload = {
             ...values,
             examId: exam._id,
-            assignedBy: '6720cb43966bb22e30a741e2',
+            assignedBy: user?.id
         }
         const { success, message, error } = await postAllData('examAssignment', payload)
         if (success) {

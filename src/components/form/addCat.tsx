@@ -3,8 +3,11 @@ import { useFormik } from 'formik';
 import { postAllData } from '@/lib/postAll';
 import toast from 'react-hot-toast';
 import { catInitialValues, catType, catValidation } from '@/formData/cat';
+import { useAuthContext } from '@/context/authContext';
 
 export default function AddCat() {
+
+    const { user } = useAuthContext()
 
     const formik = useFormik({
         initialValues: catInitialValues,
@@ -15,11 +18,11 @@ export default function AddCat() {
     })
 
     const handleSubmit = async (values: catType) => {
-        const {name, description} = values
+        const { name, description } = values
         const payload = {
             name,
             description,
-            createdBy:'6720cb43966bb22e30a741e2'
+            createdBy: user?.id
         }
         const { success, message, error } = await postAllData('category', payload, 'allCat')
         if (success) {

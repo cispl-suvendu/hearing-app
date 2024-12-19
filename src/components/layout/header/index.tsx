@@ -10,6 +10,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { IoMdLogOut } from "react-icons/io";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { useRouter } from 'next/navigation';
+import { useAuthContext } from '@/context/authContext';
 
 interface HeaderProps {
     handleNavChange: () => void
@@ -18,19 +19,7 @@ interface HeaderProps {
 
 export default function Header({ handleNavChange, activeNav }: HeaderProps) {
 
-    const [user, setUser] = useState<JwtPayload>({})
-
-    const getUser = async () => {
-        const respose = await getUserInfo()
-        setUser(respose)
-    }
-
-    useEffect(() => {
-        getUser()
-        return () => {
-            setUser({})
-        }
-    }, [])
+    const {user} = useAuthContext()
 
     const router = useRouter()
 
