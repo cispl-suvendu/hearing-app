@@ -1,14 +1,11 @@
 import * as Yup from 'yup';
 
-export const signUpInitialValues = {
-    name: '',
+export const signInInitialValues = {
     email: '',
     password: ''
 }
 
-export const signUpValidation = Yup.object({
-    name: Yup.string()
-        .required('Name is required!'),
+export const signInValidation = Yup.object({
     email: Yup.string().email()
         .required('Email is required!'),
     password: Yup.string()
@@ -18,8 +15,7 @@ export const signUpValidation = Yup.object({
 
 });
 
-export interface signUpType {
-    name: string,
+export interface signInType {
     email: string,
     password: string
 }

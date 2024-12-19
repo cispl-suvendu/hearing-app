@@ -5,28 +5,37 @@ import Link from 'next/link';
 import { useFormik } from 'formik';
 import { postAllData } from '@/lib/postAll';
 import toast from 'react-hot-toast';
-import { signUpInitialValues, signUpType, signUpValidation } from '@/formData/signUp';
+import { signInInitialValues, signInType, signInValidation } from '@/formData/signIn';
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
-export default function SignUp() {
+export default function SignIn() {
+
+    const router = useRouter()
 
     const formik = useFormik({
-        initialValues: signUpInitialValues,
-        validationSchema: signUpValidation,
-        onSubmit: (values: signUpType) => {
+        initialValues: signInInitialValues,
+        validationSchema: signInValidation,
+        onSubmit: (values: signInType) => {
             handleSubmit(values)
         }
     })
 
-    const handleSubmit = async (values: signUpType) => {
-        const { success, message, error } = await postAllData('user/signup', values)
+    const handleSubmit = async (values: signInType) => {
+        const { success, message, error, data } = await postAllData('signin', values)
         if (success) {
             formik.resetForm()
             toast.success(message);
+            router.replace('/dashboard')
+            //Cookies.set('token', data.token, { expires: 7, path: '' })
         }
-        if (error) {
-            toast.error(message);
+        if (!success) {
+            toast.error(error);
         }
+        console.log(success, message, error, data)
     }
+
+    
 
     return (
         <div>
@@ -41,7 +50,7 @@ export default function SignUp() {
                     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                                Create an account
+                                SignIn
                             </h1>
                             <form className="space-y-4 md:space-y-6" onSubmit={formik.handleSubmit}>
                                 <div>
@@ -84,41 +93,12 @@ export default function SignUp() {
                                         <div className='errorMsg'>{formik.errors.password}</div>
                                     ) : null}
                                 </div>
-                                <div>
-                                    <label
-                                        htmlFor="name"
-                                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                    >
-                                        Full Name
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        id="name"
-                                        placeholder="John Deo"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        onChange={formik.handleChange}
-                                        value={formik.values.name}
-                                    />
-                                    {formik.touched.name && formik.errors.name ? (
-                                        <div className='errorMsg'>{formik.errors.name}</div>
-                                    ) : null}
-                                </div>
                                 <button
                                     type="submit"
                                     className="btnPrimary w-full"
                                 >
-                                    Create an account
+                                    Sign In
                                 </button>
-                                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                    Already have an account?{" "}
-                                    <a
-                                        href="#"
-                                        className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                                    >
-                                        Login here
-                                    </a>
-                                </p>
                             </form>
                         </div>
                     </div>

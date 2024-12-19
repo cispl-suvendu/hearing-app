@@ -71,7 +71,6 @@ export default function AddExam() {
                                 <option key={cat._id} value={cat._id}>{cat.name}</option>
                             )
                         })}
-
                     </select>
                     {formik.touched.categoryId && formik.errors.categoryId ? (
                         <div className='errorMsg'>{formik.errors.categoryId as string}</div> // Ensure it's a string

@@ -1,16 +1,23 @@
-import { connectToDB } from '@/lib/database';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 
+export async function GET(req: NextRequest) {
+    const token = req.cookies.get("token")?.value;
 
-export async function GET(req: NextApiRequest, res: NextApiResponse): Promise<Response> {
+    if (!token) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     try {
-        await connectToDB();
-        return new Response("OK")
-    } catch (error: any) {
-        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        const secretKey = process.env.NEXTAUTH_SECRET || "your-secret-key";
+        const decoded = jwt.verify(token, secretKey);
 
-        return new Response(`Webhook error: ${errorMessage}`, {
-            status: 400,
-        });
+        // You can access decoded token details here
+        console.log("Decoded Token:", decoded);
+
+        return NextResponse.json({ message: "Token is valid", user: decoded });
+    } catch (err: any) {
+        console.error("Token verification failed:", err.message);
+        return NextResponse.json({ error: "Invalid token" }, { status: 401 });
     }
 }
