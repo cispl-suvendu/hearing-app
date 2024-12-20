@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
         const token = jwt.sign(jwtPayload, SECRET, options);
 
         return NextResponse.json(
-            { success: true, message: "User signed in!", data: token },
+            { success: true, message: "Signed in successfully", data: token },
             { status: 200 }
         );
 

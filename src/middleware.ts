@@ -5,7 +5,7 @@ import { NextRequest } from "next/server";
 
 const SECRET_KEY = process.env.NEXTAUTH_SECRET || "your-secret-key";
 
-const publicRoutes = ["/signin", "/about", "/help"];
+const publicRoutes = ["/signin", "/about", "/help", "/api/examAssignment/:id"];
 const adminRoutes = ["/dashboard", "/categories", "/questionnaires", "/user"];
 const apiRoutes = ["/api/category", "/api/exam", "/api/examAssignment", "/api/question", "/api/subCategory", "/api/user"];
 
@@ -16,7 +16,7 @@ export async function middleware(req: NextRequest) {
     const url = req.nextUrl.clone();
     const { pathname } = url;
 
-    //console.log("Current pathname:", pathname, 'token', token);
+    console.log(`Middleware processing route: ${pathname}`); // Debugging
 
     // Redirect '/' based on login status
     if (pathname === "/") {
@@ -37,7 +37,10 @@ export async function middleware(req: NextRequest) {
     }
 
     // Allow access to public routes
-    if (publicRoutes.some((route) => pathname.startsWith(route))) {
+    if (publicRoutes.some((route) => {
+        const regex = new RegExp(`^${route.replace(/:id/, "[^/]+")}$`);
+        return regex.test(pathname);
+    })) {
         return NextResponse.next();
     }
 
@@ -60,7 +63,7 @@ export async function middleware(req: NextRequest) {
     // Protect API routes
     if (apiRoutes.some((route) => pathname.startsWith(route))) {
         if (!token) {
-            return new NextResponse("Unauthorized", { status: 500 });
+            return new NextResponse("Unauthorized", { status: 401 });
         }
 
         try {
@@ -75,7 +78,6 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
 }
 
-
 export const config = {
-    matcher: ['/', '/((?!api|static|_next|favicon.ico).*)', '/api/:path*'],
+    matcher: ['/', '/((?!api|_next|static|favicon.ico).*)', '/api/:path*'],
 };

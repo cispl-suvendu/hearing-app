@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { connectToDB } from '@/lib/database';
 import ExamAssignment from '@/models/examAssignment';
 import jwt from 'jsonwebtoken';
+const SECRET = process.env.EXAM_SECRET || 'default_secret'
 
 // POST method: Create a new assignment
 export async function POST(req: Request) {
@@ -10,8 +11,7 @@ export async function POST(req: Request) {
     const { examId, userEmail, userName, assignedBy, status } = await req.json();
 
     // Secret key for JWT
-    const SECRET = process.env.EXAM_SECRET || 'default_secret'
-
+    
     // JWT Payload
     const jwtPayload = {
       userEmail,

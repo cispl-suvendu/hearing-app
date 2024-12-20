@@ -4,8 +4,6 @@ import Link from 'next/link'
 import { LiaHireAHelper } from "react-icons/lia";
 import { IoIosMenu } from "react-icons/io";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-import { getUserInfo } from '@/lib/getUserInfo';
-import { JwtPayload } from 'jsonwebtoken';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { IoMdLogOut } from "react-icons/io";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
@@ -49,7 +47,7 @@ export default function Header({ handleNavChange, activeNav }: HeaderProps) {
                             <div className='text-grayText text-sm capitalize'>
                                 {user?.name}
                             </div>
-                            <div className='w-12 h-12 bg-skyLight rounded-[50%] flex items-center justify-center lowercase text-xl leading-none	 text-supportingMegenda cursor-pointer uppercase'>
+                            <div className='w-12 h-12 bg-skyLight rounded-[50%] flex items-center justify-center text-xl leading-none text-supportingMegenda cursor-pointer uppercase'>
                                 {user?.name?.substring(0, 1)}
                             </div>
                         </MenuButton>
