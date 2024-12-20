@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import MainNavigation from './navigation'
 import MainContent from './content'
 import Header from './header'
-import { Toaster } from 'react-hot-toast';
 import { AuthContextProvider } from '@/context/authContext'
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
@@ -19,7 +18,6 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                     <MainNavigation activeNav={activeNav} />
                     <MainContent activeNav={activeNav}>{children}</MainContent>
                 </div>
-                <Toaster />
             </div>
         </AuthContextProvider>
     )

@@ -49,7 +49,7 @@ export default function Header({ handleNavChange, activeNav }: HeaderProps) {
                             <div className='text-grayText text-sm capitalize'>
                                 {user?.name}
                             </div>
-                            <div className='w-12 h-12 bg-skyLight rounded-[50%] flex items-center justify-center lowercase text-xl leading-none	 text-supportingMegenda cursor-pointer'>
+                            <div className='w-12 h-12 bg-skyLight rounded-[50%] flex items-center justify-center lowercase text-xl leading-none	 text-supportingMegenda cursor-pointer uppercase'>
                                 {user?.name?.substring(0, 1)}
                             </div>
                         </MenuButton>

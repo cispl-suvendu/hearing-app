@@ -31,6 +31,7 @@ export default function SignIn() {
         }
         if (!success) {
             toast.error(error);
+            formik.setSubmitting(false)
         }
     }
 
@@ -92,16 +93,16 @@ export default function SignIn() {
                                 </div>
                                 <button
                                     type="submit"
-                                    className="btnPrimary w-full"
+                                    className="btnPrimary w-full transition-all disabled:bg-primaryLight disabled:cursor-not-allowed"
+                                    disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}
                                 >
-                                    Sign In
+                                    {formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add your info' : 'Sign In'}
                                 </button>
                             </form>
                         </div>
                     </div>
                 </div>
             </section>
-
         </div>
     )
 }
