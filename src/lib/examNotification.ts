@@ -34,7 +34,7 @@ export async function sendExamNotification({
             html: `
                 <div>
                     <h4>Hello ${customerData.name}, Please check exam link below:</h4>
-                    <a href="${process.env.NEXT_URL}${customerData.link}" traget="_blank">Exam Link</a>
+                    <a href="${process.env.NEXT_URL}/start-exam/${customerData.link}" traget="_blank">Exam Link</a>
                 </div>`,
         };
 
