@@ -2,6 +2,7 @@ import React from 'react'
 import startImage from '../../assets/start-exam.jpg'
 import Image from 'next/image'
 import StartAnimation from './StartAnimation'
+import { useRouter } from 'next/navigation';
 
 interface startExamProps {
     exam: any,
@@ -11,6 +12,8 @@ interface startExamProps {
 }
 
 export default function StartExam({ exam, handleGetStatred, showAnimation, isExamCompleted }: startExamProps) {
+
+    const router = useRouter()
 
     return (
         <div className='relative z-20'>
@@ -27,18 +30,18 @@ export default function StartExam({ exam, handleGetStatred, showAnimation, isExa
                 <div className='mt-6'>
                     <h1 className='text-xl font-mono my-2'>Hello, <strong className='font-bold'>{exam[0]?.userName}</strong></h1>
                     {exam[0]?.status === 'completed' || isExamCompleted ? <div className='mt-4'>
-                    <p className='text-grayText'>You have completed this exam. Click 'View Result' to see your score.</p>
-                </div> :
-                <div className='mt-4'>
-                     <p className='text-grayText'>Get ready to test your knowledge! Click 'Start Exam' to begin and challenge yourself with carefully curated questions.</p>
-                </div>}
+                        <p className='text-grayText'>You have completed this exam. Click 'View Result' to see your score.</p>
+                    </div> :
+                        <div className='mt-4'>
+                            <p className='text-grayText'>Get ready to test your knowledge! Click 'Start Exam' to begin and challenge yourself with carefully curated questions.</p>
+                        </div>}
                 </div>
                 {exam[0]?.status === 'completed' || isExamCompleted ? <div className='mt-4'>
-                    <button className='btnClose w-full'>View Result</button>
+                    <button className='btnClose w-full' onClick={() => router.push(`/result/${exam[0]?.examLink}`)}>View Result</button>
                 </div> :
-                <div className='mt-4'>
-                    <button className='btnPrimary w-full' onClick={() => handleGetStatred()}>Start Exam</button>
-                </div>}
+                    <div className='mt-4'>
+                        <button className='btnPrimary w-full' onClick={() => handleGetStatred()}>Start Exam</button>
+                    </div>}
             </div>
             {showAnimation && <StartAnimation />}
         </div>

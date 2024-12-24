@@ -90,7 +90,7 @@ export interface IExamAssignment {
   examId: Types.ObjectId | {
     _id:string,
     title:string
-  }; // Reference to Exam ID
+  } | any; // Reference to Exam ID
   userName: string;
   userEmail: string;
   assignedBy: Types.ObjectId | {
@@ -100,7 +100,8 @@ export interface IExamAssignment {
   status: 'assigned' | 'completed' | 'reviewed';
   examLink:string,
   createdAt?:string,
-  answer:[]
+  answer:[],
+  result: any,
 }
 
 export interface IUserAnswer {

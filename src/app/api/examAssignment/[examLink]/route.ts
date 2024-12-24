@@ -33,7 +33,13 @@ export async function POST(req: Request, { params }: { params: Promise<{ examLin
         await connectToDB();
 
         // Fetch the assignment
-        const currentAssignment = await ExamAssignment.findOne({ examLink });
+        const currentAssignment = await ExamAssignment.findOne({ examLink }).populate({
+            path: 'examId',
+            populate: {
+                path: 'questions',
+                select: 'questionText options_A options_B options_C options_D isCorrect',
+            },
+        });
 
         if (!currentAssignment) {
             return NextResponse.json(
@@ -49,9 +55,32 @@ export async function POST(req: Request, { params }: { params: Promise<{ examLin
             );
         }
 
+         // Calculate result
+         const totalMarks = currentAssignment.examId.questions.length;
+         let score = 0;
+         const result = currentAssignment.examId.questions.map((question: any) => {
+             const submittedAnswer = answer.find(
+                 (ans: any) => ans.questionId === question._id.toString()
+             );
+ 
+             const isCorrect = submittedAnswer?.correctAns === question.isCorrect;
+             if (isCorrect) score++;
+ 
+             return {
+                 ...question.toObject(),
+                 isSelected: submittedAnswer?.correctAns || '',
+                 isAnsCorrect: isCorrect,
+             };
+         });
+
         // Update assignment details
         currentAssignment.status = 'completed';
         currentAssignment.answer = answer;
+        currentAssignment.result = {
+            total_marks: totalMarks,
+            score: score,
+            result: result,
+        };
 
         await currentAssignment.save();
 
