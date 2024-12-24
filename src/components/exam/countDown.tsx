@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
 interface CountdownTimerProps {
-    timeInSeconds: number; // Total time for the countdown
+    timeInSeconds: number;
+    getTimeLeft: (time: number) => void;
 }
 
-const CountdownTimer: React.FC<CountdownTimerProps> = ({ timeInSeconds }) => {
+const CountdownTimer: React.FC<CountdownTimerProps> = ({ timeInSeconds, getTimeLeft }) => {
+
+    const [progress, setProgress] = useState(100);
     const [timeLeft, setTimeLeft] = useState(timeInSeconds);
-    const [progress, setProgress] = useState(100); // Progress percentage
 
     useEffect(() => {
         if (timeLeft > 0) {
             const interval = setInterval(() => {
                 setTimeLeft((prev) => prev - 1);
                 setProgress((prev) => (timeLeft / timeInSeconds) * 100);
+                getTimeLeft(timeLeft);
             }, 1000);
 
             return () => clearInterval(interval); // Cleanup interval on unmount

@@ -6,10 +6,12 @@ import StartAnimation from './StartAnimation'
 interface startExamProps {
     exam: any,
     handleGetStatred: () => void;
-    showAnimation: boolean
+    showAnimation: boolean,
+    isExamCompleted: boolean
 }
 
-export default function StartExam({ exam, handleGetStatred, showAnimation }: startExamProps) {
+export default function StartExam({ exam, handleGetStatred, showAnimation, isExamCompleted }: startExamProps) {
+
     return (
         <div className='relative z-20'>
             <div className={`${showAnimation && 'opacity-30'} bg-white p-12 rounded-xl w-8/12 mx-auto`}>
@@ -19,15 +21,24 @@ export default function StartExam({ exam, handleGetStatred, showAnimation }: sta
                         <div className='bg-white rounded text-xs p-1'>{exam[0]?.examId.title}</div>
                         <div className='bg-white rounded text-xs p-1'>Question: {exam[0]?.examId.numQuestions}</div>
                         <div className='bg-white rounded text-xs p-1'>Time: {exam[0]?.examId.timeLimit} min</div>
+                        <div className='bg-white rounded text-xs p-1 capitalize'>Status: {exam[0]?.status}</div>
                     </div>
                 </div>
                 <div className='mt-6'>
                     <h1 className='text-xl font-mono my-2'>Hello, <strong className='font-bold'>{exam[0]?.userName}</strong></h1>
-                    <p className='text-grayText'>Get ready to test your knowledge! Click 'Start Exam' to begin and challenge yourself with carefully curated questions.</p>
+                    {exam[0]?.status === 'completed' || isExamCompleted ? <div className='mt-4'>
+                    <p className='text-grayText'>You have completed this exam. Click 'View Result' to see your score.</p>
+                </div> :
+                <div className='mt-4'>
+                     <p className='text-grayText'>Get ready to test your knowledge! Click 'Start Exam' to begin and challenge yourself with carefully curated questions.</p>
+                </div>}
                 </div>
+                {exam[0]?.status === 'completed' || isExamCompleted ? <div className='mt-4'>
+                    <button className='btnClose w-full'>View Result</button>
+                </div> :
                 <div className='mt-4'>
                     <button className='btnPrimary w-full' onClick={() => handleGetStatred()}>Start Exam</button>
-                </div>
+                </div>}
             </div>
             {showAnimation && <StartAnimation />}
         </div>

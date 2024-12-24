@@ -99,7 +99,8 @@ export interface IExamAssignment {
   }; // User ID of the assigner (HR/Admin)
   status: 'assigned' | 'completed' | 'reviewed';
   examLink:string,
-  createdAt?:string
+  createdAt?:string,
+  answer:[]
 }
 
 export interface IUserAnswer {

@@ -4,13 +4,71 @@ import ExamAssignment from '@/models/examAssignment';
 const SECRET = process.env.EXAM_SECRET || 'default_secret'
 import jwt from 'jsonwebtoken'
 
-// POST method: Create a new assignment
-export async function POST(req: Request) {
-    return NextResponse.json(
-        { success: true, message: 'user development' },
-        { status: 200 }
-    );
+
+export async function POST(req: Request, { params }: { params: Promise<{ examLink: string }> }) {
+    try {
+        const examLink = (await params).examLink
+
+        if (!examLink) {
+            return NextResponse.json(
+                { success: false, message: 'Missing exam link.' },
+                { status: 400 }
+            );
+        }
+
+        // Verify JWT token
+        jwt.verify(examLink, SECRET);
+
+        const body = await req.json();
+        const { answer } = body;
+
+        if (!answer) {
+            return NextResponse.json(
+                { success: false, message: 'Missing answer.' },
+                { status: 400 }
+            );
+        }
+
+        // Connect to the database
+        await connectToDB();
+
+        // Fetch the assignment
+        const currentAssignment = await ExamAssignment.findOne({ examLink });
+
+        if (!currentAssignment) {
+            return NextResponse.json(
+                { success: false, message: 'Assignment not found.' },
+                { status: 404 }
+            );
+        }
+
+        if (currentAssignment.status !== 'assigned') {
+            return NextResponse.json(
+                { success: false, message: 'Unauthorized or invalid assignment status.' },
+                { status: 403 }
+            );
+        }
+
+        // Update assignment details
+        currentAssignment.status = 'completed';
+        currentAssignment.answer = answer;
+
+        await currentAssignment.save();
+
+        return NextResponse.json(
+            { success: true, message: 'Assignment submitted.' },
+            { status: 200 }
+        );
+    } catch (error: any) {
+        console.error('Error processing POST request:', error);
+
+        return NextResponse.json(
+            { success: false, message: 'Internal server error.', error: error.message },
+            { status: 500 }
+        );
+    }
 }
+
 
 // GET method: Retrieve all assignments
 export async function GET(req: Request, { params }: { params: Promise<{ examLink: string }> }) {

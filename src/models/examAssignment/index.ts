@@ -7,7 +7,8 @@ const examAssignmentSchema = new Schema<IExamAssignment>({
   userEmail: { type: String, required: true },
   assignedBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   status: { type: String, enum: ['assigned', 'completed', 'reviewed'], required: true },
-  examLink: String
+  examLink: String,
+  answer:[]
 }, { timestamps: true });
 
 
