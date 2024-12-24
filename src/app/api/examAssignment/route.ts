@@ -3,6 +3,7 @@ import { connectToDB } from '@/lib/database';
 import ExamAssignment from '@/models/examAssignment';
 import jwt from 'jsonwebtoken';
 const SECRET = process.env.EXAM_SECRET || 'default_secret'
+import { sendExamNotification } from '@/lib/examNotification';
 
 // POST method: Create a new assignment
 export async function POST(req: Request) {
@@ -11,7 +12,7 @@ export async function POST(req: Request) {
     const { examId, userEmail, userName, assignedBy, status } = await req.json();
 
     // Secret key for JWT
-    
+
     // JWT Payload
     const jwtPayload = {
       userEmail,
@@ -38,6 +39,14 @@ export async function POST(req: Request) {
       examLink: token
     });
 
+    const customerData = {
+      name: newAssignment.userName,
+      email: newAssignment.userEmail,
+      link: newAssignment.examLink
+    }
+
+    await sendExamNotification({ customerData })
+
     return NextResponse.json({ success: true, data: newAssignment, message: `Exam assignment completed` }, { status: 201 });
   } catch (error: any) {
     return NextResponse.json({ success: false, message: 'Failed to create assignment.', error: error.message }, { status: 500 });
@@ -45,7 +54,7 @@ export async function POST(req: Request) {
 }
 
 // GET method: Retrieve all assignments
-export async function GET(req:Request) {
+export async function GET(req: Request) {
   try {
     await connectToDB();
     // Extract query parameters
@@ -55,7 +64,7 @@ export async function GET(req:Request) {
     // Build query
     const query = examId ? { examId } : {};
     // Fetch all assignments
-    const assignments = await ExamAssignment.find(query).populate({path:'examId', populate:{path:'questions', select: 'questionText options_A options_B options_C options_D'}}).populate('assignedBy', 'name');
+    const assignments = await ExamAssignment.find(query).populate({ path: 'examId', populate: { path: 'questions', select: 'questionText options_A options_B options_C options_D' } }).populate('assignedBy', 'name');
 
     return NextResponse.json({ success: true, data: assignments }, { status: 200 });
   } catch (error: any) {

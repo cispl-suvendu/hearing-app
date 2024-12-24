@@ -2,7 +2,6 @@ import React from 'react'
 
 export default function AnsCard({ question }: any) {
     const listAns = ['A', 'B', 'C', 'D']
-    console.log(question)
     return (
         <div className={`bg-white my-4 px-6 py-12 rounded-xl ${question.isAnsCorrect ? 'border border-green-500' : 'border border-red-500'}`}>
             <h2 className="text-xl font-mono">{question.questionText}</h2>
