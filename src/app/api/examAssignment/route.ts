@@ -61,12 +61,32 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const examId = searchParams.get("examId");
 
+    const page = parseInt(searchParams.get("page") || "1", 10); // Default to page 1
+    const limit = parseInt(searchParams.get("limit") || "10", 10); // Default to 10 items per page
+    const skip = (page - 1) * limit; // Calculate items to skip
+
     // Build query
     const query = examId ? { examId } : {};
     // Fetch all assignments
-    const assignments = await ExamAssignment.find(query).populate({ path: 'examId', populate: { path: 'questions', select: 'questionText options_A options_B options_C options_D' } }).populate('assignedBy', 'name');
 
-    return NextResponse.json({ success: true, data: assignments }, { status: 200 });
+    const totalAssignments = await ExamAssignment.countDocuments(query);
+
+    const assignments = await ExamAssignment.find(query)
+      .populate({ path: 'examId', populate: { path: 'questions', select: 'questionText options_A options_B options_C options_D' } }).populate('assignedBy', 'name')
+      .sort({ createdAt: -1 }) // Sort by creation date (newest first)
+      .skip(skip) // Skip documents for pagination
+      .limit(limit); // Limit the number of documents;
+
+    return NextResponse.json({
+      success: true,
+      data: assignments,
+      pagination: {
+        total: totalAssignments,
+        page,
+        limit,
+        totalPages: Math.ceil(totalAssignments / limit),
+      },
+    }, { status: 200 });
   } catch (error: any) {
     return NextResponse.json({ success: false, message: 'Failed to retrieve assignments.', error: error.message }, { status: 500 });
   }

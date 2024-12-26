@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { LiaHireAHelper } from "react-icons/lia";
+import { SiQuizlet } from "react-icons/si";
 import Link from 'next/link';
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
@@ -38,10 +38,10 @@ export default function SignIn() {
         <div>
             <section className="bg-gray-50 dark:bg-gray-900">
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                    <div className='site-logo mb-4'>
+                    <div className='site-logo mb-8 scale-150'>
                         <Link href='/'>
-                            <LiaHireAHelper className='logo-icon' />
-                            <h1>Logo Here</h1>
+                            <SiQuizlet className='logo-icon' />
+                            <h1>quizyFy</h1>
                         </Link>
                     </div>
                     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

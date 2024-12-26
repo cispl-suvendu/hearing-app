@@ -74,7 +74,7 @@ export default function AddExam({ categories, subCategories }: ExamInterface) {
                         <div className='errorMsg'>{formik.errors.categoryId as string}</div> // Ensure it's a string
                     ) : null}
                 </div>
-                <div className='inptHldr flex-1'>
+                {formik.values.categoryId && <div className='inptHldr flex-1'>
                     <select value={formik.values.subcategoryId} onChange={formik.handleChange} className='inputStyle' name='subcategoryId'>
                         <option value=''>Select Sub Category</option>
                         {subCategoryById.map((cat: ICategory) => {
@@ -86,8 +86,8 @@ export default function AddExam({ categories, subCategories }: ExamInterface) {
                     {formik.touched.subcategoryId && formik.errors.subcategoryId ? (
                         <div className='errorMsg'>{formik.errors.subcategoryId as string}</div> // Ensure it's a string
                     ) : null}
-                </div>
-                <div className='inptHldr flex-1'>
+                </div>}
+                {formik.values.subcategoryId && <div className='inptHldr flex-1'>
                     <select value={formik.values.difficulty} onChange={formik.handleChange} className='inputStyle' name='difficulty'>
                         <option value=''>Select Difficulty Level</option>
                         {difficultyLevel.map(item => {
@@ -99,7 +99,7 @@ export default function AddExam({ categories, subCategories }: ExamInterface) {
                     {formik.touched.difficulty && formik.errors.difficulty ? (
                         <div className='errorMsg'>{formik.errors.difficulty as string}</div>
                     ) : null}
-                </div>
+                </div>}
                 <div className='inptHldr flex-1'>
                     <select value={formik.values.numQuestions} onChange={formik.handleChange} className='inputStyle' name='numQuestions'>
                         <option value=''>Select Number of Questions</option>

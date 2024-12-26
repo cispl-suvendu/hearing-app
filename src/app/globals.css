@@ -27,7 +27,7 @@ body {
 }
 
 .site-logo .logo-icon{
-  @apply text-4xl text-primaryDark animate-spin-slow
+  @apply text-xl text-primaryDark
 }
 
 .site-logo h1{
@@ -71,7 +71,15 @@ body {
 }
 
 .inputStyle{
-  @apply border rounded-md px-2 py-2 text-sm text-grayText w-full
+  @apply border rounded-md px-2 py-2 text-sm text-grayText w-full h-10
+}
+
+select.inputStyle{
+  @apply capitalize
+}
+
+input[type=file].inputStyle{
+  @apply py-[7px] px-2 appearance-none
 }
 
 .errorMsg{

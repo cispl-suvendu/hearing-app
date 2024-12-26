@@ -13,6 +13,8 @@ interface ExamDeatilsCardProps {
 export default function ExamDeatilsCard({ exam }: ExamDeatilsCardProps) {
     const [reFetchCat, setReFetchCat] = useState<boolean>(false)
     const [showAddForm, setShowAddForm] = useState<boolean>(false)
+    const [page, setPage] = useState<number>(1)
+    const [limit, setLimit] = useState<number>(5)
     const handleShowForm = () => {
         setShowAddForm(prev => !prev)
     }
@@ -20,13 +22,15 @@ export default function ExamDeatilsCard({ exam }: ExamDeatilsCardProps) {
         data: IExamAssignment[];
         success: boolean;
         error: string;
+        pagination: { total: number; limit: number; page: number; pages: number; };
     }>({
         data: [],
         success: false,
         error: '',
+        pagination: {} as any
     });
     const getAssignedExam = async () => {
-        const { data, success, message, error } = await getDataById('examAssignment', 'examId', exam._id)
+        const { data, success, message, error, pagination } = await getDataById('examAssignment', 'examId', exam._id, '', page, limit)
         if (!success) {
             toast.error(message)
         }
@@ -37,7 +41,8 @@ export default function ExamDeatilsCard({ exam }: ExamDeatilsCardProps) {
             ...prevdata,
             data,
             success,
-            error
+            error,
+            pagination
         }))
     }
 
@@ -47,17 +52,19 @@ export default function ExamDeatilsCard({ exam }: ExamDeatilsCardProps) {
             setAssignedExam({
                 data: [],
                 success: false,
-                error: ''
+                error: '',
+                pagination: {} as any
             })
         }
-    }, [exam._id, reFetchCat])
+    }, [exam._id, reFetchCat, page, limit])
+
     return (
         <div>
             <div className='flex justify-between mb-2'>
                 <h2>{!showAddForm ? 'All Assigned Exam' : 'Assign Exam'}</h2>
                 <button className={showAddForm ? 'btnClose' : 'btnPrimary'} onClick={() => handleShowForm()}>{showAddForm ? 'Close' : 'New Assign'}</button>
             </div>
-            {showAddForm ? <Suspense fallback={<Skeleton />}><AssignExam exam={exam} reFetch={setReFetchCat} closeAddForm={handleShowForm} /></Suspense> : <Suspense fallback={<Skeleton />}><AssignExamCard assignedExam={assignedExam} /></Suspense>}
+            {showAddForm ? <Suspense fallback={<Skeleton />}><AssignExam exam={exam} reFetch={setReFetchCat} closeAddForm={handleShowForm} /></Suspense> : <Suspense fallback={<Skeleton />}><AssignExamCard assignedExam={assignedExam} setPage={setPage} setLimit={setLimit} pageLimit={limit} /></Suspense>}
         </div>
     )
 }

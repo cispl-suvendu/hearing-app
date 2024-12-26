@@ -49,6 +49,8 @@ export default function AddQuestion({ categories, subCategories }: AddQuestionPr
 
     const subCategoryById = formik.values.categoryId ? subCategories.filter((cat: ISubcategory) => cat.categoryId._id as unknown as string === formik.values.categoryId) : subCategories
 
+    console.log(formik.values)
+
     return (
         <form onSubmit={formik.handleSubmit}>
             <div className='flex justify-between gap-2'>
@@ -66,7 +68,7 @@ export default function AddQuestion({ categories, subCategories }: AddQuestionPr
                         <div className='errorMsg'>{formik.errors.categoryId as string}</div> // Ensure it's a string
                     ) : null}
                 </div>
-                <div className='inptHldr flex-1'>
+                {formik.values.categoryId && <div className='inptHldr flex-1'>
                     <select value={formik.values.subcategoryId} onChange={formik.handleChange} className='inputStyle' name='subcategoryId'>
                         <option value=''>Select Sub Category</option>
                         {subCategoryById.map((cat: ICategory) => {
@@ -78,7 +80,7 @@ export default function AddQuestion({ categories, subCategories }: AddQuestionPr
                     {formik.touched.subcategoryId && formik.errors.subcategoryId ? (
                         <div className='errorMsg'>{formik.errors.subcategoryId as string}</div> // Ensure it's a string
                     ) : null}
-                </div>
+                </div>}
                 <div className='inptHldr flex-1'>
                     <input
                         type='file'

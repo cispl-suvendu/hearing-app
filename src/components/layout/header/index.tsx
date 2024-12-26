@@ -9,6 +9,8 @@ import { IoMdLogOut } from "react-icons/io";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { useRouter } from 'next/navigation';
 import { useAuthContext } from '@/context/authContext';
+import { SiQuizlet } from "react-icons/si";
+
 
 interface HeaderProps {
     handleNavChange: () => void
@@ -28,13 +30,13 @@ export default function Header({ handleNavChange, activeNav }: HeaderProps) {
     }
 
     return (
-        <div className='bg-light p-4 shadow-[2px_-3px_13px_14px_#f5f7ff] relative z-[1]'>
+        <div className='bg-light p-4 shadow-[2px_-3px_13px_14px_#f5f7ff] fixed w-full z-[1]'>
             <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-6'>
                     <div className='site-logo'>
                         <Link href='/dashboard'>
-                            <LiaHireAHelper className='logo-icon' />
-                            <h1>Logo Here</h1>
+                            <SiQuizlet className='logo-icon' />
+                            <h1>quizyFy</h1>
                         </Link>
                     </div>
                     <div className='menuTigger'>
