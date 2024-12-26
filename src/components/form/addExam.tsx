@@ -11,12 +11,12 @@ import { difficultyLevel } from '@/constant/difficulty';
 import { useAuthContext } from '@/context/authContext';
 
 interface ExamInterface {
-    categories:ICategory[],
-    subCategories:ISubcategory[]
+    categories: ICategory[],
+    subCategories: ISubcategory[]
 }
 
-export default function AddExam({categories, subCategories}:ExamInterface) {
-    
+export default function AddExam({ categories, subCategories }: ExamInterface) {
+
     const { user } = useAuthContext()
 
     const formik = useFormik({
@@ -127,7 +127,7 @@ export default function AddExam({categories, subCategories}:ExamInterface) {
                     ) : null}
                 </div>
                 <div className='btnHldr'>
-                    <button type="submit" className='btnPrimary'>Add</button>
+                    <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add your info' : 'Add'}</button>
                 </div>
             </div>
         </form>

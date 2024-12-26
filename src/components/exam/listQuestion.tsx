@@ -48,19 +48,19 @@ function ListQuestion({ allQuestion, formik, shuffleArray }: ListQuestionProps) 
   //     }
   //   }
   // }, []); // Dependency array ensures this runs only once
-  
-  
+
+
 
   return (
     <div>
       <div className="bg-white text-grayText inline-block px-4 py-2 rounded-md">
         Showing <strong className="font-bold">{currentIndex + 1}</strong> of {allQuestion.length}
       </div>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className='bg-white my-2 px-6 py-12 rounded-xl'>
         <QCard question={allQuestion[currentIndex]} index={currentIndex} formik={formik} shuffleArray={shuffleArray} />
         {currentIndex + 1 === allQuestion.length && (
-          <div className="mt-6">
-            <button type='submit' className="btnPrimary w-full">Submit</button>
+          <div className="mt-6 mr-6">
+            <button type="submit" className='btnPrimary w-full' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add your info' : 'Submit'}</button>
           </div>
         )}
       </form>

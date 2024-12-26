@@ -3,7 +3,6 @@ import React from 'react'
 import { LiaHireAHelper } from "react-icons/lia";
 import Link from 'next/link';
 import { useFormik } from 'formik';
-import { postAllData } from '@/lib/postAll';
 import toast from 'react-hot-toast';
 import { signInInitialValues, signInType, signInValidation } from '@/formData/signIn';
 import { useRouter } from 'next/navigation';

@@ -72,7 +72,7 @@ export default function ExamComponent({ exam }: any) {
         }
     }, [timeEnd]);
 
-    // console.log(shuffledAllQuestion, formik.values.answer, exam[0]?.examId._id, 'timeEnd', timeEnd);
+     console.log(shuffledAllQuestion, formik.values.answer, exam[0]?.examId._id, 'timeEnd', timeEnd);
 
     if (isExamCompleted) {
         return (

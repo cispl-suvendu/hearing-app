@@ -4,7 +4,7 @@ export default function QCard({ question, formik, index, shuffleArray }: any) {
   const listAns = useMemo(() => shuffleArray(['A', 'B', 'C', 'D']), [question._id]); 
   
   return (
-        <div className="bg-white my-2 px-6 py-12 rounded-xl">
+        <div className="">
             <h2 className="text-xl font-mono">{question.questionText}</h2>
             <ul className="flex gap-4 flex-wrap mt-4">
               {listAns.map((option:any, optionIndex:number) => {

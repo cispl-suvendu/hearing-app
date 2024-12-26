@@ -59,11 +59,15 @@ body {
 }
 
 .btnPrimary{
-  @apply bg-supportingMegenda text-white px-5 py-2 rounded-md
+  @apply bg-supportingMegenda text-white px-5 py-2 rounded-md transition-all
 }
 
 .btnClose{
   @apply bg-grayText text-white px-5 py-2 rounded-md
+}
+
+.btnPrimary:disabled{
+  @apply bg-primaryLight cursor-not-allowed
 }
 
 .inputStyle{

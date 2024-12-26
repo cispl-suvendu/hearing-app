@@ -42,7 +42,7 @@ export default function AssignExamCard({ assignedExam }: AssignedExamProps) {
                                         <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{exam.createdAt}</td>
                                         <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{exam.status}</td>
                                         <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            <Link href={`/start-exam/${exam.examLink}`}>View</Link>
+                                            <Link href={`/start-exam/${exam.examLink}`} target="_blank">View</Link>
                                         </td>
                                     </tr>
                                 )

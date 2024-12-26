@@ -7,12 +7,12 @@ import { ICategory, ISubcategory } from '@/type';
 import { useAuthContext } from '@/context/authContext';
 
 interface AddQuestionProps {
-    categories:ICategory[],
-    subCategories:ISubcategory[]
+    categories: ICategory[],
+    subCategories: ISubcategory[]
 }
 
-export default function AddQuestion({categories, subCategories}:AddQuestionProps) {
-    const {user} = useAuthContext()
+export default function AddQuestion({ categories, subCategories }: AddQuestionProps) {
+    const { user } = useAuthContext()
 
     const formik = useFormik({
         initialValues: questionInitialValues,
@@ -91,7 +91,7 @@ export default function AddQuestion({categories, subCategories}:AddQuestionProps
                     ) : null}
                 </div>
                 <div className='btnHldr'>
-                    <button type="submit" className='btnPrimary'>Add</button>
+                    <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add your info' : 'Add'}</button>
                 </div>
             </div>
         </form>

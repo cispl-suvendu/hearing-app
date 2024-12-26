@@ -14,7 +14,7 @@ interface AssignExamProps {
 }
 
 export default function AssignExam({ exam, reFetch, closeAddForm }: AssignExamProps) {
-    const {user} = useAuthContext()
+    const { user } = useAuthContext()
     const formik = useFormik({
         initialValues: assignExamInitialValues,
         validationSchema: assignExamValidation,
@@ -75,7 +75,7 @@ export default function AssignExam({ exam, reFetch, closeAddForm }: AssignExamPr
                         ) : null}
                     </div>
                     <div className='btnHldr'>
-                        <button type="submit" className='btnPrimary'>Assign</button>
+                        <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add your info' : 'Assign'}</button>
                     </div>
                 </div>
             </form>
