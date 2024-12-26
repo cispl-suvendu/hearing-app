@@ -24,7 +24,7 @@ export default function StartExam({ exam, handleGetStatred, showAnimation, isExa
                         <div className='bg-white rounded text-xs p-1'>{exam[0]?.examId.title}</div>
                         <div className='bg-white rounded text-xs p-1'>Question: {exam[0]?.examId.numQuestions}</div>
                         <div className='bg-white rounded text-xs p-1'>Time: {exam[0]?.examId.timeLimit} min</div>
-                        <div className='bg-white rounded text-xs p-1 capitalize'>Status: {exam[0]?.status}</div>
+                        <div className='bg-white rounded text-xs p-1 capitalize'>Status: {isExamCompleted ? 'completed' : exam[0]?.status}</div>
                     </div>
                 </div>
                 <div className='mt-6'>
