@@ -11,7 +11,7 @@ export default function AnsCard({ question }: any) {
                     return (
                         <li key={optionIndex} className="w-[48%]">
                             <div className="w-full relative">
-                                <span className={`customRadioLbl ${question.isCorrect === option.toLowerCase() ? '!bg-green-500' : ''} ${question.isSelected === option.toLowerCase() ? '!opacity-30 !border-4 border-green-900' : ''}`}>
+                                <span className={`customRadioLbl ${question.isCorrect.toLowerCase() === option.toLowerCase() ? '!bg-green-500' : ''} ${question.isSelected.toLowerCase() === option.toLowerCase() ? '!opacity-30 !border-4 border-green-900' : ''}`}>
                                     {optionIndex + 1}. {question[optionValue]}
                                 </span>
                             </div>

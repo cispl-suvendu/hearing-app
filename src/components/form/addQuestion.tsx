@@ -49,7 +49,7 @@ export default function AddQuestion({ categories, subCategories }: AddQuestionPr
 
     const subCategoryById = formik.values.categoryId ? subCategories.filter((cat: ISubcategory) => cat.categoryId._id as unknown as string === formik.values.categoryId) : subCategories
 
-    console.log(formik.values)
+    console.log(formik)
 
     return (
         <form onSubmit={formik.handleSubmit}>

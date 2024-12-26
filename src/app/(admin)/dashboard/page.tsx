@@ -19,8 +19,8 @@ export default async function Dashboard() {
       </div>
       <div className="w-1/2">
         <div className="mb-4">
-          <FilterList exam={inCompletedExams} title="Completed Assigments" />
-          <FilterList exam={completedExams} title="In Progress Assigments" />
+          <FilterList exam={completedExams} title="Completed Assigments" />
+          <FilterList exam={inCompletedExams} title="In Progress Assigments" />
         </div>
         <Statistics allCat={allCat} allQuestions={allQuestions} allExam={allExam} allSubCat={allSubCat} allAssignedExam={allAssignedExam} />
       </div>

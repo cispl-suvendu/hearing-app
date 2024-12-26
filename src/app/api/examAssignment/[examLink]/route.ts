@@ -63,7 +63,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ examLin
                  (ans: any) => ans.questionId === question._id.toString()
              );
  
-             const isCorrect = submittedAnswer?.correctAns === question.isCorrect;
+             const isCorrect = submittedAnswer?.correctAns.toLowerCase() === question.isCorrect.toLowerCase();
              if (isCorrect) score++;
  
              return {
