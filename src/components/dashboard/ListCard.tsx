@@ -9,7 +9,6 @@ interface AssignedExamProps {
 }
 
 export default function ListCard({ assignedExam}: AssignedExamProps) {
-    console.log(assignedExam)
     return (
         <>
             {assignedExam.data?.length === 0 && assignedExam.success ? <NoItemFound componentName='Assigned Exam' /> :
