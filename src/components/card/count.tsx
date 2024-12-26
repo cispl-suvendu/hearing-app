@@ -13,12 +13,12 @@ interface AnimatedCountProps {
 
 export default function AnimatedCount({ title, Icon, total, link }: AnimatedCountProps) {
     return (
-        <div className='bg-white p-8 px-6 rounded-xl w-[47%]'>
+        <div className='bg-white p-6 px-6 rounded-xl w-[47%]'>
             <div className='flex justify-between'>
                 <div className='text-md capitalize'>{title}</div>
                 <div className='text-2xl text-supportingMegenda mr-4'>{Icon}</div>
             </div>
-            <div className='flex justify-between items-center mt-6'>
+            <div className='flex justify-between items-center mt-4'>
                 <div className='text-4xl'>
                     <CountUp end={total} />
                 </div>
