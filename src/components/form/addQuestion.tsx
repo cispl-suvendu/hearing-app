@@ -42,7 +42,8 @@ export default function AddQuestion({ categories, subCategories }: AddQuestionPr
             toast.success(message);
             formik.setFieldValue('file', '')
         }
-        if (error) {
+        if (!success) {
+            formik.setSubmitting(false)
             toast.error(error);
         }
     };
@@ -54,7 +55,7 @@ export default function AddQuestion({ categories, subCategories }: AddQuestionPr
         <form onSubmit={formik.handleSubmit}>
             <div className='flex justify-between gap-2'>
                 <div className='inptHldr flex-1'>
-                    <select value={formik.values.categoryId} onChange={formik.handleChange} className='inputStyle' name='categoryId'>
+                    <select value={formik.values.categoryId} onChange={formik.handleChange} className='inputStyle' name='categoryId' onBlur={formik.handleBlur}>
                         <option value=''>Select Category</option>
                         {categories.map((cat: ICategory) => {
                             return (
@@ -68,7 +69,7 @@ export default function AddQuestion({ categories, subCategories }: AddQuestionPr
                     ) : null}
                 </div>
                 {formik.values.categoryId && <div className='inptHldr flex-1'>
-                    <select value={formik.values.subcategoryId} onChange={formik.handleChange} className='inputStyle' name='subcategoryId'>
+                    <select value={formik.values.subcategoryId} onChange={formik.handleChange} className='inputStyle' name='subcategoryId' onBlur={formik.handleBlur}>
                         <option value=''>Select Sub Category</option>
                         {subCategoryById.map((cat: ICategory) => {
                             return (
@@ -86,13 +87,14 @@ export default function AddQuestion({ categories, subCategories }: AddQuestionPr
                         className='inputStyle'
                         onChange={(e) => formik.setFieldValue('file', e.currentTarget.files?.[0])}
                         name='file'
+                        onBlur={formik.handleBlur}
                     />
                     {formik.touched.file && formik.errors.file ? (
                         <div className='errorMsg'>{formik.errors.file as string}</div> // Ensure it's a string
                     ) : null}
                 </div>
                 <div className='btnHldr'>
-                    <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add your info' : 'Add'}</button>
+                    <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add info' : 'Add'}</button>
                 </div>
             </div>
         </form>

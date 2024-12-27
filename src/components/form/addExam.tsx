@@ -43,6 +43,7 @@ export default function AddExam({ categories, subCategories }: ExamInterface) {
 
         if (!success) {
             toast.error(message);
+            formik.setSubmitting(false)
         }
 
         if (error) {
@@ -56,13 +57,13 @@ export default function AddExam({ categories, subCategories }: ExamInterface) {
         <form onSubmit={formik.handleSubmit}>
             <div className='flex justify-between gap-2'>
                 <div className='inptHldr flex-1'>
-                    <input type='text' value={formik.values.title} onChange={formik.handleChange} name='title' placeholder='Title' className='inputStyle' />
+                    <input type='text' value={formik.values.title} onChange={formik.handleChange} name='title' placeholder='Title' className='inputStyle' onBlur={formik.handleBlur} />
                     {formik.touched.title && formik.errors.title ? (
                         <div className='errorMsg'>{formik.errors.title as string}</div> // Ensure it's a string
                     ) : null}
                 </div>
                 <div className='inptHldr flex-1'>
-                    <select value={formik.values.categoryId} onChange={formik.handleChange} className='inputStyle' name='categoryId'>
+                    <select value={formik.values.categoryId} onChange={formik.handleChange} className='inputStyle' name='categoryId' onBlur={formik.handleBlur}>
                         <option value=''>Select Category</option>
                         {categories.map((cat: ICategory) => {
                             return (
@@ -75,7 +76,7 @@ export default function AddExam({ categories, subCategories }: ExamInterface) {
                     ) : null}
                 </div>
                 {formik.values.categoryId && <div className='inptHldr flex-1'>
-                    <select value={formik.values.subcategoryId} onChange={formik.handleChange} className='inputStyle' name='subcategoryId'>
+                    <select value={formik.values.subcategoryId} onChange={formik.handleChange} className='inputStyle' name='subcategoryId' onBlur={formik.handleBlur}>
                         <option value=''>Select Sub Category</option>
                         {subCategoryById.map((cat: ICategory) => {
                             return (
@@ -88,7 +89,7 @@ export default function AddExam({ categories, subCategories }: ExamInterface) {
                     ) : null}
                 </div>}
                 {formik.values.subcategoryId && <div className='inptHldr flex-1'>
-                    <select value={formik.values.difficulty} onChange={formik.handleChange} className='inputStyle' name='difficulty'>
+                    <select value={formik.values.difficulty} onChange={formik.handleChange} className='inputStyle' name='difficulty' onBlur={formik.handleBlur}>
                         <option value=''>Select Difficulty Level</option>
                         {difficultyLevel.map(item => {
                             return (
@@ -101,7 +102,7 @@ export default function AddExam({ categories, subCategories }: ExamInterface) {
                     ) : null}
                 </div>}
                 <div className='inptHldr flex-1'>
-                    <select value={formik.values.numQuestions} onChange={formik.handleChange} className='inputStyle' name='numQuestions'>
+                    <select value={formik.values.numQuestions} onChange={formik.handleChange} className='inputStyle' name='numQuestions' onBlur={formik.handleBlur}>
                         <option value=''>Select Number of Questions</option>
                         {numQuestions.map(item => {
                             return (
@@ -114,7 +115,7 @@ export default function AddExam({ categories, subCategories }: ExamInterface) {
                     ) : null}
                 </div>
                 <div className='inptHldr flex-1'>
-                    <select value={formik.values.timeLimit} onChange={formik.handleChange} className='inputStyle' name='timeLimit'>
+                    <select value={formik.values.timeLimit} onChange={formik.handleChange} className='inputStyle' name='timeLimit' onBlur={formik.handleBlur}>
                         <option value=''>Select Time Limit</option>
                         {timeLimit.map(item => {
                             return (
@@ -127,7 +128,7 @@ export default function AddExam({ categories, subCategories }: ExamInterface) {
                     ) : null}
                 </div>
                 <div className='btnHldr'>
-                    <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add your info' : 'Add'}</button>
+                    <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add info' : 'Add'}</button>
                 </div>
             </div>
         </form>

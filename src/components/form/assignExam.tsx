@@ -37,9 +37,11 @@ export default function AssignExam({ exam, reFetch, closeAddForm }: AssignExamPr
             closeAddForm()
         }
         if (!success) {
+            formik.setSubmitting(false)
             toast.error(message);
         }
         if (error) {
+            formik.setSubmitting(false)
             toast.error(error)
         }
     }
@@ -56,6 +58,7 @@ export default function AssignExam({ exam, reFetch, closeAddForm }: AssignExamPr
                             value={formik.values.userName}
                             className='inputStyle'
                             placeholder='Full Name'
+                            onBlur={formik.handleBlur}
                         />
                         {formik.touched.userName && formik.errors.userName ? (
                             <div className='errorMsg'>{formik.errors.userName}</div>
@@ -69,13 +72,14 @@ export default function AssignExam({ exam, reFetch, closeAddForm }: AssignExamPr
                             value={formik.values.userEmail}
                             className='inputStyle'
                             placeholder='Email'
+                            onBlur={formik.handleBlur}
                         />
                         {formik.touched.userEmail && formik.errors.userEmail ? (
                             <div className='errorMsg'>{formik.errors.userEmail}</div>
                         ) : null}
                     </div>
                     <div className='btnHldr'>
-                        <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add your info' : 'Assign'}</button>
+                        <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add info' : 'Assign'}</button>
                     </div>
                 </div>
             </form>

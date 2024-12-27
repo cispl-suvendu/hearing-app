@@ -29,7 +29,8 @@ export default function AddCat() {
             formik.resetForm()
             toast.success('Successfully created!');
         }
-        if (error) {
+        if (!success) {
+            formik.setSubmitting(false)
             toast.error(message);
         }
     }
@@ -45,6 +46,7 @@ export default function AddCat() {
                         value={formik.values.name}
                         className='inputStyle'
                         placeholder='Name'
+                        onBlur={formik.handleBlur}
                     />
                     {formik.touched.name && formik.errors.name ? (
                         <div className='errorMsg'>{formik.errors.name}</div>
@@ -58,13 +60,14 @@ export default function AddCat() {
                         value={formik.values.description}
                         className='inputStyle'
                         placeholder='Description'
+                        onBlur={formik.handleBlur}
                     />
                     {formik.touched.description && formik.errors.description ? (
                         <div className='errorMsg'>{formik.errors.description}</div>
                     ) : null}
                 </div>
                 <div className='btnHldr'>
-                    <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add your info' : 'Add'}</button>
+                    <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add info' : 'Add'}</button>
                 </div>
             </div>
         </form>

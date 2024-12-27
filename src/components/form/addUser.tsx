@@ -24,6 +24,7 @@ export default function AddUser() {
         }
         if (!success) {
             toast.error(error);
+            formik.setSubmitting(false)
         }
     }
 
@@ -43,6 +44,7 @@ export default function AddUser() {
                         value={formik.values.name}
                         className='inputStyle'
                         placeholder='Full Name'
+                        onBlur={formik.handleBlur}
                     />
                     {formik.touched.name && formik.errors.name ? (
                         <div className='errorMsg'>{formik.errors.name}</div>
@@ -56,6 +58,7 @@ export default function AddUser() {
                         value={formik.values.email}
                         className='inputStyle'
                         placeholder='Email'
+                        onBlur={formik.handleBlur}
                     />
                     {formik.touched.email && formik.errors.email ? (
                         <div className='errorMsg'>{formik.errors.email}</div>
@@ -69,13 +72,14 @@ export default function AddUser() {
                         value={formik.values.password}
                         className='inputStyle'
                         placeholder='Password'
+                        onBlur={formik.handleBlur}
                     />
                     {formik.touched.password && formik.errors.password ? (
                         <div className='errorMsg'>{formik.errors.password}</div>
                     ) : null}
                 </div>
                 <div className='btnHldr'>
-                    <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add your info' : 'Add'}</button>
+                    <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add info' : 'Add'}</button>
                 </div>
             </div>
         </form>

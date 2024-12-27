@@ -38,8 +38,9 @@ export default function AddSubCat({ catId, createdBy, reFetch, closeAddForm }: A
             toast.success('Successfully created!');
             closeAddForm()
         }
-        if (error) {
-            toast.error(message);
+        if (!success) {
+            formik.setSubmitting(false)
+            toast.error(error);
         }
     }
 
@@ -54,13 +55,14 @@ export default function AddSubCat({ catId, createdBy, reFetch, closeAddForm }: A
                         value={formik.values.subCatName}
                         className='inputStyle'
                         placeholder='Category Name'
+                        onBlur={formik.handleBlur}
                     />
                     {formik.touched.subCatName && formik.errors.subCatName ? (
                         <div className='errorMsg'>{formik.errors.subCatName}</div>
                     ) : null}
                 </div>
                 <div className='btnHldr'>
-                    <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add your info' : 'Add'}</button>
+                    <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add info' : 'Add'}</button>
                 </div>
             </div>
         </form>
