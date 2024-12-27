@@ -18,6 +18,13 @@ export async function middleware(req: NextRequest) {
 
     console.log(`Middleware processing route: ${pathname}`); // Debugging
 
+
+    if (pathname === "/signin" && token) {
+        const { payload } = await jwtVerify(token, new TextEncoder().encode(SECRET_KEY)); // Use jose to verify the JWT
+        url.pathname = "/dashboard"; // Redirect logged-in user
+        return NextResponse.redirect(url);
+    }
+
     // Redirect '/' based on login status
     if (pathname === "/") {
         if (token) {
