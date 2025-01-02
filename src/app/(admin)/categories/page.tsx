@@ -5,7 +5,7 @@ import { ICategory } from '@/type'
 import ErrorMessage from '@/components/error'
 import NoItemFound from '@/components/notfound'
 import CatHeader from '../../../components/header/catHeader'
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 import type { Metadata } from 'next'
 
 

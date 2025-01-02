@@ -6,7 +6,7 @@ import ErrorMessage from '@/components/error'
 import NoItemFound from '@/components/notfound'
 import Question from '@/components/card/question'
 import { IQuestion } from '@/type'
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 import { PageProps } from '@/type'
 import Pagination from '@/components/pagination'
 

@@ -6,7 +6,7 @@ import ErrorMessage from '@/components/error'
 import NoItemFound from '@/components/notfound'
 import { IUser } from '@/type'
 import UserCard from '@/components/card/userCard'
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
     title: 'Admin Users',

@@ -2,7 +2,7 @@ import React from 'react'
 import ExamHeader from '@/components/header/examHeader'
 import { Metadata } from 'next'
 import { getAllData } from '@/lib/getAll'
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 import ErrorMessage from '@/components/error'
 import NoItemFound from '@/components/notfound'
 import ExamCard from '@/components/card/exam';

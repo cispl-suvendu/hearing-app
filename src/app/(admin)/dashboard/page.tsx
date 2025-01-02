@@ -1,6 +1,6 @@
 import AssignmentsStatistics from "@/components/dashboard/AssignmentsStatistics";
 import Statistics from "@/components/dashboard/statistics";
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 import { getAllData } from "@/lib/getAll";
 import FilterList from "@/components/dashboard/FilterList";
 

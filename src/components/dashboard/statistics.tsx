@@ -6,7 +6,7 @@ import { TbMessageCircleQuestion } from "react-icons/tb";
 import { RiGraduationCapLine } from "react-icons/ri";
 import { MdOutlineAssignment } from "react-icons/md";
 import { ICategory, IExam, IExamAssignment, IQuestion, ISubcategory } from '@/type';
-export const dynamic = "force-dynamic";
+//export const dynamic = "force-dynamic";
 
 interface StatisticsProps {
   allCat: ICategory[],
