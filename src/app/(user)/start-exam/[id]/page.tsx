@@ -1,5 +1,4 @@
 import React from 'react'
-import StartExam from '@/components/exam/startExam'
 import { getAssignedExam } from '@/lib/getAssignedExam'
 import NoItemFound from '@/components/notfound'
 import ExamComponent from '@/components/exam'

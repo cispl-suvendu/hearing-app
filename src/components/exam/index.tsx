@@ -1,11 +1,11 @@
 'use client'
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, useLayoutEffect } from 'react'
 import StartExam from './startExam'
 import CountdownTimer from './countDown'
 import ListQuestion from './listQuestion'
 import { useFormik } from 'formik'
 import { startExamInitialValues, startExamType } from '@/formData/startExam'
-import { postAssignedExam } from '@/lib/getAssignedExam'
+import { postAssignedExam, getAssignedExam } from '@/lib/getAssignedExam'
 import toast from 'react-hot-toast'
 
 
@@ -14,7 +14,7 @@ export default function ExamComponent({ exam }: any) {
     const [start, setStart] = useState<boolean>(true)
     const [showAnimation, setShowAnimation] = useState<boolean>(false)
     const [isExamCompleted, setIsExamCompleted] = useState<boolean>(false)
-
+    let updatedExam = null
     const handleGetStatred = () => {
         setShowAnimation(prev => !prev)
         setTimeout(() => {
@@ -70,7 +70,25 @@ export default function ExamComponent({ exam }: any) {
         if (timeEnd) {
             formik.handleSubmit()
         }
-    }, [timeEnd]);
+    }, [timeEnd]); 
+
+    useEffect(() => {
+        const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+            // Trigger form submission
+            if (!isExamCompleted && !start) {
+                formik.handleSubmit();
+            }
+            // Customize the message if needed (some browsers may ignore it)
+            event.preventDefault();
+            event.returnValue = ''; // Required for older browsers
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [isExamCompleted, start]); // Re-run if `isExamCompleted` changes
 
     if (isExamCompleted) {
         return (
