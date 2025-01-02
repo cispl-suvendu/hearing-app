@@ -3,86 +3,86 @@
 @tailwind utilities;
 
 :root {
-  --cream:#F9F1F0;
-  --roseQuartz:#FADCD9;
-  --dustyRose:#F8AFA6;
-  --coral:#F79489;
-  --dark:#0a0a0a;
-  --light:#ffffff;
-  --skyLight:#f5f7ff;
-  --primaryDark:#4b49ac;
-  --primaryLight:#98bdff;
-  --supportingSky:#7da0fa;
-  --supportingMegenda:#7978e9;
-  --supprtingCoral:#f3797e;
-  --grayText:#6C7383;
+  --cream: #F9F1F0;
+  --roseQuartz: #FADCD9;
+  --dustyRose: #F8AFA6;
+  --coral: #F79489;
+  --dark: #0a0a0a;
+  --light: #ffffff;
+  --skyLight: #f5f7ff;
+  --primaryDark: #4b49ac;
+  --primaryLight: #98bdff;
+  --supportingSky: #7da0fa;
+  --supportingMegenda: #7978e9;
+  --supprtingCoral: #f3797e;
+  --grayText: #6C7383;
 }
 
 body {
   font-family: var(--font-geist-sans);
 }
 
-.site-logo a{
+.site-logo a {
   @apply flex items-center gap-2
 }
 
-.site-logo .logo-icon{
+.site-logo .logo-icon {
   @apply text-xl text-primaryDark
 }
 
-.site-logo h1{
+.site-logo h1 {
   @apply font-bold font-mono text-primaryDark text-xl
 }
 
-.menuTigger{
+.menuTigger {
   @apply text-2xl text-grayText cursor-pointer
 }
 
-.mainNavigation{
+.mainNavigation {
   @apply list-none m-0 p-0 flex flex-col gap-6
 }
 
-.mainNavigation li{
+.mainNavigation li {
   @apply m-0 p-0
 }
 
-.mainNavigation li a{
+.mainNavigation li a {
   @apply flex items-center justify-start gap-2 text-grayText transition-all
 }
 
-.mainNavigation li a:hover{
+.mainNavigation li a:hover {
   @apply text-primaryDark
 }
 
-.mainNavigation li a.active{
+.mainNavigation li a.active {
   @apply text-primaryDark
 }
 
-.btnPrimary{
+.btnPrimary {
   @apply bg-supportingMegenda text-white px-5 py-2 rounded-md transition-all
 }
 
-.btnClose{
+.btnClose {
   @apply bg-grayText text-white px-5 py-2 rounded-md
 }
 
-.btnPrimary:disabled{
+.btnPrimary:disabled {
   @apply bg-primaryLight cursor-not-allowed
 }
 
-.inputStyle{
+.inputStyle {
   @apply border rounded-md px-2 py-2 text-sm text-grayText w-full h-10
 }
 
-select.inputStyle{
+select.inputStyle {
   @apply capitalize
 }
 
-input[type=file].inputStyle{
+input[type=file].inputStyle {
   @apply py-[7px] px-2 appearance-none
 }
 
-.errorMsg{
+.errorMsg {
   @apply text-red-600 text-[12px] mt-1
 }
 
@@ -90,14 +90,14 @@ input[type=file].inputStyle{
   @apply text-sm text-grayText
 }
 
-.skeleton{
+.skeleton {
   width: 100%;
-  height:100px;
-   background: #eee;
-    background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-    border-radius: 5px;
-    background-size: 200% 100%;
-    animation: 1.5s skeletonShine linear infinite;
+  height: 100px;
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  border-radius: 5px;
+  background-size: 200% 100%;
+  animation: 1.5s skeletonShine linear infinite;
 }
 
 @keyframes skeletonShine {
@@ -119,6 +119,7 @@ input[type=file].inputStyle{
   transform: translateX(-50%);
   z-index: 999;
 }
+
 .startAnimation__colored-blocks {
   overflow: hidden;
   position: absolute;
@@ -131,8 +132,9 @@ input[type=file].inputStyle{
   border-radius: 20px;
   perspective: 1000px;
   -webkit-animation: demoAnim 4s ease-in-out infinite, contAnim 4s infinite;
-          animation: demoAnim 4s ease-in-out infinite, contAnim 4s infinite;
+  animation: demoAnim 4s ease-in-out infinite, contAnim 4s infinite;
 }
+
 .startAnimation__colored-blocks-rotater {
   position: absolute;
   left: 0;
@@ -141,8 +143,9 @@ input[type=file].inputStyle{
   height: 100%;
   border-radius: inherit;
   -webkit-animation: rotation 1.3s linear infinite;
-          animation: rotation 1.3s linear infinite;
+  animation: rotation 1.3s linear infinite;
 }
+
 .startAnimation__colored-blocks-inner {
   overflow: hidden;
   position: relative;
@@ -150,6 +153,7 @@ input[type=file].inputStyle{
   background: #32386d;
   border-radius: inherit;
 }
+
 .startAnimation__colored-block {
   position: absolute;
   left: 50%;
@@ -158,24 +162,29 @@ input[type=file].inputStyle{
   height: 300%;
   transform-origin: 0 0;
 }
+
 .startAnimation__colored-block:nth-child(1) {
   transform: rotate(0deg) skewX(-30deg);
   background-color: #fd3359;
 }
+
 .startAnimation__colored-block:nth-child(2) {
   transform: rotate(120deg) skewX(-30deg);
   background-color: #f4d302;
 }
+
 .startAnimation__colored-block:nth-child(3) {
   transform: rotate(240deg) skewX(-30deg);
   background-color: #21bdff;
 }
+
 .startAnimation__inner {
   overflow: hidden;
   position: relative;
   width: 100%;
   height: 100%;
 }
+
 .startAnimation__numbers {
   overflow: visible;
   position: absolute;
@@ -186,6 +195,7 @@ input[type=file].inputStyle{
   margin-left: -50px;
   margin-top: -50px;
 }
+
 .startAnimation__numbers-path {
   fill: none;
   stroke-width: 10px;
@@ -195,9 +205,10 @@ input[type=file].inputStyle{
   stroke-dasharray: 0, 518.055065155;
   stroke-dashoffset: 0;
   -webkit-animation: numAnim 4s ease-in-out infinite;
-          animation: numAnim 4s ease-in-out infinite;
+  animation: numAnim 4s ease-in-out infinite;
   opacity: 0;
 }
+
 .startAnimation__text {
   position: absolute;
   left: 50%;
@@ -213,157 +224,213 @@ input[type=file].inputStyle{
   letter-spacing: 15px;
   transform: translateX(10px);
   -webkit-animation: hideText 4s infinite;
-          animation: hideText 4s infinite;
+  animation: hideText 4s infinite;
 }
 
 @-webkit-keyframes contAnim {
-  15%, 100% {
+
+  15%,
+  100% {
     margin-left: -250px;
     width: 500px;
   }
-  25%, 90% {
+
+  25%,
+  90% {
     margin-left: -70px;
     width: 140px;
   }
 }
 
 @keyframes contAnim {
-  15%, 100% {
+
+  15%,
+  100% {
     margin-left: -250px;
     width: 500px;
   }
-  25%, 90% {
+
+  25%,
+  90% {
     margin-left: -70px;
     width: 140px;
   }
 }
+
 @-webkit-keyframes numAnim {
   15% {
     stroke-dasharray: 0, 518.055065155;
     stroke-dashoffset: 0;
     opacity: 0;
   }
-  25%, 41% {
+
+  25%,
+  41% {
     opacity: 1;
     stroke-dasharray: 144.4256591797, 518.055065155;
     stroke-dashoffset: -40;
   }
-  53%, 66% {
+
+  53%,
+  66% {
     stroke-dasharray: 136.0216217041, 518.055065155;
     stroke-dashoffset: -227.238697052;
   }
+
   76% {
     stroke-dasharray: 113.4751205444, 518.055065155;
     stroke-dashoffset: -445.8995704651;
   }
-  88%, 100% {
+
+  88%,
+  100% {
     stroke-dasharray: 72.1554946899, 518.055065155;
     stroke-dashoffset: -445.8995704651;
   }
+
   92% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
 }
+
 @keyframes numAnim {
   15% {
     stroke-dasharray: 0, 518.055065155;
     stroke-dashoffset: 0;
     opacity: 0;
   }
-  25%, 41% {
+
+  25%,
+  41% {
     opacity: 1;
     stroke-dasharray: 144.4256591797, 518.055065155;
     stroke-dashoffset: -40;
   }
-  53%, 66% {
+
+  53%,
+  66% {
     stroke-dasharray: 136.0216217041, 518.055065155;
     stroke-dashoffset: -227.238697052;
   }
+
   76% {
     stroke-dasharray: 113.4751205444, 518.055065155;
     stroke-dashoffset: -445.8995704651;
   }
-  88%, 100% {
+
+  88%,
+  100% {
     stroke-dasharray: 72.1554946899, 518.055065155;
     stroke-dashoffset: -445.8995704651;
   }
+
   92% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
 }
+
 @-webkit-keyframes rotation {
   to {
     transform: rotate(360deg);
   }
 }
+
 @keyframes rotation {
   to {
     transform: rotate(360deg);
   }
 }
+
 @-webkit-keyframes demoAnim {
   15% {
     border-radius: 20px;
     transform: rotate(0);
   }
-  30%, 43% {
+
+  30%,
+  43% {
     border-radius: 50%;
     transform: rotate(360deg);
   }
-  52%, 65% {
+
+  52%,
+  65% {
     border-radius: 0;
     transform: rotate(720deg);
   }
-  78%, 90% {
+
+  78%,
+  90% {
     border-radius: 50%;
     transform: rotate(1080deg);
   }
+
   100% {
     border-radius: 20px;
     transform: rotate(1440deg);
   }
 }
+
 @keyframes demoAnim {
   15% {
     border-radius: 20px;
     transform: rotate(0);
   }
-  30%, 43% {
+
+  30%,
+  43% {
     border-radius: 50%;
     transform: rotate(360deg);
   }
-  52%, 65% {
+
+  52%,
+  65% {
     border-radius: 0;
     transform: rotate(720deg);
   }
-  78%, 90% {
+
+  78%,
+  90% {
     border-radius: 50%;
     transform: rotate(1080deg);
   }
+
   100% {
     border-radius: 20px;
     transform: rotate(1440deg);
   }
 }
+
 @-webkit-keyframes hideText {
-  15%, 100% {
+
+  15%,
+  100% {
     opacity: 1;
   }
-  20%, 96% {
+
+  20%,
+  96% {
     opacity: 0;
   }
 }
+
 @keyframes hideText {
-  15%, 100% {
+
+  15%,
+  100% {
     opacity: 1;
   }
-  20%, 96% {
+
+  20%,
+  96% {
     opacity: 0;
   }
 }
@@ -372,11 +439,46 @@ input[type=file].inputStyle{
   @apply opacity-0 absolute w-full h-full left-0 top-0 cursor-pointer
 }
 
-.customRadioLbl{
-  @apply capitalize cursor-pointer bg-skyLight px-4 py-2 w-full block rounded-md text-sm 
+.customRadioLbl {
+  @apply capitalize cursor-pointer bg-skyLight px-4 py-2 w-full block rounded-md text-sm
 }
 
-.customRadio:checked + .customRadioLbl{
+.customRadio:checked+.customRadioLbl {
   @apply bg-primaryLight text-white
 }
 
+/* HTML: <div class="loader"></div> */
+.dash_loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(farthest-side, var(--supportingMegenda) 94%, #0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%, var(--supportingMegenda));
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: l13 1s infinite linear;
+  margin: 0 auto;
+}
+
+@keyframes l13 {
+  100% {
+    transform: rotate(1turn)
+  }
+}
+
+.dash_loader_container {
+  position: relative;
+  height: 100vh;
+}
+
+.dash_loader_container .dash_loader_container_inr{
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.dash_loader_title{
+  @apply text-supportingSky font-bold text-sm capitalize mb-4
+}
