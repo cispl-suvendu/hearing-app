@@ -59,6 +59,8 @@ export default function SubCategoryLayout({ catId, createdBy }: SubCategoryLayou
     return <ErrorMessage errorDetail={SubCat.error} />
   }
 
+  console.log('reFetchCat', reFetchCat)
+
   return (
     <>
       <div className='flex justify-between mb-2'>
@@ -69,7 +71,7 @@ export default function SubCategoryLayout({ catId, createdBy }: SubCategoryLayou
         <div className='flex gap-2'>
           {SubCat.data.map((data: ISubcategory, index) => {
             return (
-              <SubCategoryCard key={index} subCat={data} />
+              <SubCategoryCard key={index} subCat={data} reFetch={setReFetchCat} />
             )
           })}
         </div>

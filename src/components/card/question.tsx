@@ -4,6 +4,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
 import { BiDownArrowCircle } from "react-icons/bi";
 import { TbUserHexagon } from "react-icons/tb";
 import DifficultyLevel from '../difficulty';
+import DeleteCard from './deleteCard';
 
 interface QuestionProps {
     question: IQuestion
@@ -45,8 +46,9 @@ export default function Question({ question }: QuestionProps) {
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div className='flex items-center justify-end gap-2'>
                                 <div className='text-primaryDark text-sm flex items-center gap-2'>view deatils <BiDownArrowCircle className='text-xl group-data-[open]:rotate-180' /></div>
+                                <DeleteCard pathName='question' id={question._id} tags='allQuestion' />
                             </div>
                         </div>
                     </div>

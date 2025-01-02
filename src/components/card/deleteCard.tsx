@@ -4,6 +4,7 @@ import { MdOutlineDelete } from "react-icons/md";
 import Modal from '../modal';
 import { handleDelete } from '../../lib/handleDelete';
 import toast from 'react-hot-toast';
+import { ref } from 'yup';
 
 interface DeleteCardProps {
     pathName: string,
@@ -44,7 +45,6 @@ export default function DeleteCard({ pathName, id, tags }: DeleteCardProps) {
             toast.success(respose.message)
         }
     }
-
 
     return (
         <div>
