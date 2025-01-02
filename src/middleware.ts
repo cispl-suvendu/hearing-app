@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { jwtVerify } from "jose"; // Import jwtVerify from 'jose'
+import { jwtVerify, errors as joseErrors } from "jose"; // Updated: Import specific error types
 import { NextRequest } from "next/server";
 
 const SECRET_KEY = process.env.NEXTAUTH_SECRET || "your-secret-key";
@@ -18,23 +18,26 @@ export async function middleware(req: NextRequest) {
 
     console.log(`Middleware processing route: ${pathname}`); // Debugging
 
-
     if (pathname === "/signin" && token) {
-        const { payload } = await jwtVerify(token, new TextEncoder().encode(SECRET_KEY)); // Use jose to verify the JWT
-        url.pathname = "/dashboard"; // Redirect logged-in user
-        return NextResponse.redirect(url);
+        try {
+            const { payload } = await jwtVerify(token, new TextEncoder().encode(SECRET_KEY)); // Use jose to verify the JWT
+            url.pathname = "/dashboard"; // Redirect logged-in user
+            return NextResponse.redirect(url);
+        } catch (error) {
+            console.error("Token verification error:", error); // **Updated: Log token verification error**
+        }
     }
 
     // Redirect '/' based on login status
     if (pathname === "/") {
         if (token) {
             try {
-                const { payload } = await jwtVerify(token, new TextEncoder().encode(SECRET_KEY)); // Use jose to verify the JWT
+                const { payload } = await jwtVerify(token, new TextEncoder().encode(SECRET_KEY));
                 url.pathname = "/dashboard"; // Redirect logged-in user
                 return NextResponse.redirect(url);
             } catch (error) {
-                console.error("Invalid token:", error); // Log invalid token error
-                url.pathname = "/signin"; // Invalid token
+                console.error("Token verification error:", error); // **Updated: Handle all token verification errors**
+                url.pathname = "/signin"; // Redirect on invalid or expired token
                 return NextResponse.redirect(url);
             }
         } else {
@@ -59,10 +62,15 @@ export async function middleware(req: NextRequest) {
         }
 
         try {
-            await jwtVerify(token, new TextEncoder().encode(SECRET_KEY)); // Verify token with jose
+            await jwtVerify(token, new TextEncoder().encode(SECRET_KEY));
             return NextResponse.next();
-        } catch {
-            url.pathname = "/signin"; // Invalid token
+        } catch (error) {
+            if (error instanceof joseErrors.JWTExpired) { // **Updated: Handle expired tokens explicitly**
+                console.error("Token expired:", error); // **Updated: Log expired token error**
+                url.pathname = "/signin"; // Redirect expired tokens to sign-in
+            } else {
+                console.error("Invalid token:", error); // **Updated: Handle invalid tokens**
+            }
             return NextResponse.redirect(url);
         }
     }
@@ -76,8 +84,14 @@ export async function middleware(req: NextRequest) {
         try {
             await jwtVerify(token, new TextEncoder().encode(SECRET_KEY));
             return NextResponse.next();
-        } catch {
-            return new NextResponse("Unauthorized token", { status: 401 });
+        } catch (error) {
+            if (error instanceof joseErrors.JWTExpired) { // **Updated: Handle expired tokens for API routes**
+                console.error("Token expired:", error); // **Updated: Log expired token error**
+                return new NextResponse("Unauthorized - token expired", { status: 401 });
+            } else {
+                console.error("Invalid token:", error); // **Updated: Log other token errors**
+                return new NextResponse("Unauthorized token", { status: 401 });
+            }
         }
     }
 
@@ -86,5 +100,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/', '/((?!api|_next|static|favicon.ico).*)', '/api/:path*'],
+    matcher: ['/', '/((?!api|_next|static|favicon.ico|favicon.png).*)', '/api/:path*'],
 };
