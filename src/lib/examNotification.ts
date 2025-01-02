@@ -30,11 +30,11 @@ export async function sendExamNotification({
         const mailDetails = {
             from: process.env.GMAIL_ID,
             to: customerData.email,
-            subject: `${customerData.name} Exam assised`,
+            subject: `${customerData.name} Exam Assigned`,
             html: `
-                <div>
-                    <h4>Hello ${customerData.name}, Please check exam link below:</h4>
-                    <a href="${process.env.NEXT_URL}/start-exam/${customerData.link}" traget="_blank">Exam Link</a>
+                <div style="font-family: Arial, sans-serif; background-color: #f9f9f9; color: #333; padding: 20px;">
+                    <h4 style="font-size:22px;">Hello ${customerData.name}, Please check exam link below:</h4>
+                    <a href="${process.env.NEXT_URL}/start-exam/${customerData.link}" traget="_blank" style="background-color: #7978e9; color: #fff; padding:10px 26px; text-decoration:none;outline:none;font-size:16px">Exam Link</a>
                 </div>`,
         };
 
