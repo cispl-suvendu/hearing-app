@@ -26,7 +26,8 @@ export default function SignIn() {
         if (success) {
             formik.resetForm()
             toast.success(message);
-            router.replace('/dashboard')
+            //router.push('/dashboard')
+            window.location.replace('/dashboard')
         }
         if (!success) {
             toast.error(error);
