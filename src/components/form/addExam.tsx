@@ -51,7 +51,7 @@ export default function AddExam({ categories, subCategories }: ExamInterface) {
         }
     };
 
-    const subCategoryById = formik.values.categoryId ? subCategories.filter((cat: ISubcategory) => cat.categoryId._id as unknown as string === formik.values.categoryId) : subCategories
+    const subCategoryById = formik.values.categoryId ? subCategories.filter((cat: ISubcategory) => cat.categoryId?._id as unknown as string === formik.values.categoryId) : subCategories
 
     return (
         <form onSubmit={formik.handleSubmit}>

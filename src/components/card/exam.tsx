@@ -27,16 +27,16 @@ export default function ExamCard({ exam }: ExamCardProps) {
                                         <TbUserHexagon />
                                         <span>by</span>
                                         <span className='text-primaryDark'>
-                                            {typeof exam.createdBy === 'object' && 'name' in exam.createdBy
+                                            {exam.createdBy && typeof exam.createdBy === 'object' && 'name' in exam.createdBy
                                                 ? exam.createdBy.name
                                                 : 'Unknown Creator'}
                                         </span>
                                     </div>
                                     <div className='flex gap-3'>
-                                        <p className='text-xs text-grayText bg-skyLight px-2 py-1 rounded-sm capitalize'> {typeof exam.categoryId === 'object' && 'name' in exam.categoryId
+                                        <p className='text-xs text-grayText bg-skyLight px-2 py-1 rounded-sm capitalize'> {exam.categoryId && typeof exam.categoryId === 'object' && 'name' in exam.categoryId
                                             ? exam.categoryId.name
                                             : 'Unknown categoryId'}</p>
-                                        <p className='text-xs text-grayText bg-skyLight px-2 py-1 rounded-sm capitalize'> {typeof exam.subcategoryId === 'object' && 'name' in exam.subcategoryId
+                                        <p className='text-xs text-grayText bg-skyLight px-2 py-1 rounded-sm capitalize'> {exam.subcategoryId && typeof exam.subcategoryId === 'object' && 'name' in exam.subcategoryId
                                             ? exam.subcategoryId.name
                                             : 'Unknown subcategoryId'}</p>
                                         <div>

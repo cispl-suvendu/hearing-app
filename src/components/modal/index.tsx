@@ -17,9 +17,9 @@ export default function Modal({ children, open, close }: ModalProps) {
                 open={open}
                 onClose={() => close(false)}
                 transition
-                className="fixed inset-0 flex w-screen items-center justify-center bg-white/30 p-4 transition duration-300 ease-out data-[closed]:opacity-0"
+                className="fixed inset-0 flex w-screen items-center justify-center bg-black/30 p-4 transition duration-300 ease-out data-[closed]:opacity-0 z-50"
             >
-                <DialogPanel className="max-w-3xl space-y-4 bg-white p-12">
+                <DialogPanel>
                     {children}
                 </DialogPanel>
             </Dialog>

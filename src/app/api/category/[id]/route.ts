@@ -2,7 +2,7 @@ import { connectToDB } from "@/lib/database";
 import Category from "@/models/category";
 import { NextResponse } from "next/server";
 
-export async function GET({ params }: { params: { id: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
     // Await the params
     const { id } = await params;
 
@@ -21,7 +21,7 @@ export async function GET({ params }: { params: { id: string } }) {
     }
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
     // Await the params
     const { id } = await params;
 
@@ -46,7 +46,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
     // Await the params
     const { id } = await params;
 

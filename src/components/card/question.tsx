@@ -10,7 +10,7 @@ interface QuestionProps {
 }
 
 export default function Question({ question }: QuestionProps) {
-  const correctAns = `options_${question.isCorrect.toUpperCase()}`
+    const correctAns = `options_${question.isCorrect.toUpperCase()}`
 
     return (
         <div className='bg-white p-4 px-6 rounded-md'>
@@ -25,16 +25,18 @@ export default function Question({ question }: QuestionProps) {
                                         <TbUserHexagon />
                                         <span>by</span>
                                         <span className='text-primaryDark'>
-                                            {typeof question.createdBy === 'object' && 'name' in question.createdBy
-                                                ? question.createdBy.name
-                                                : 'Unknown Creator'}
+                                            {
+                                                question.categoryId && typeof question.categoryId === 'object' && 'name' in question.categoryId
+                                                    ? question.categoryId.name
+                                                    : 'Unknown categoryId'
+                                            }
                                         </span>
                                     </div>
                                     <div className='flex gap-3'>
-                                        <p className='text-xs text-grayText bg-skyLight px-2 py-1 rounded-sm capitalize'> {typeof question.categoryId === 'object' && 'name' in question.categoryId
+                                        <p className='text-xs text-grayText bg-skyLight px-2 py-1 rounded-sm capitalize'> {question.categoryId && typeof question.categoryId === 'object' && 'name' in question.categoryId
                                             ? question.categoryId.name
                                             : 'Unknown categoryId'}</p>
-                                        <p className='text-xs text-grayText bg-skyLight px-2 py-1 rounded-sm capitalize'> {typeof question.subcategoryId === 'object' && 'name' in question.subcategoryId
+                                        <p className='text-xs text-grayText bg-skyLight px-2 py-1 rounded-sm capitalize'> {question.subcategoryId && typeof question.subcategoryId === 'object' && 'name' in question.subcategoryId
                                             ? question.subcategoryId.name
                                             : 'Unknown subcategoryId'}</p>
                                         <div>

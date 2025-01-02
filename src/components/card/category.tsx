@@ -6,32 +6,34 @@ import { BiDownArrowCircle } from "react-icons/bi";
 // const LazyComponentSubCat = React.lazy(() => import('../subCategory'));
 import Skeleton from '../skeleton';
 import SubCategoryLayout from '../subCategory';
+import DeleteCard from './deleteCard';
 interface CategoryCardProps {
   singleCat: ICategory;
 }
 
 export default function CategoryCard({ singleCat }: CategoryCardProps) {
   return (
-    <div className='bg-white p-4 px-6 rounded-md'>
+    <div className='bg-white p-4 px-6 rounded-md relative'>
       <Disclosure>
         <DisclosureButton className='w-full group'>
           <div className='group-data-[open]:'>
-            <div className='flex justify-between items-center'>
-              <div className='text-left'>
+            <div className='flex justify-between items-center flex-wrap'>
+              <div className='text-left w-3/4'>
                 <h3 className='text-md'>{singleCat.name}</h3>
                 <p className='text-sm text-grayText'>{singleCat.description}</p>
                 <p className='text-xs text-grayText flex items-center gap-1 mt-2'>
                   <TbUserHexagon />
                   <span>by</span>
                   <span className='text-primaryDark'>
-                    {typeof singleCat.createdBy === 'object' && 'name' in singleCat.createdBy
+                    {singleCat.createdBy && typeof singleCat.createdBy === 'object' && 'name' in singleCat.createdBy
                       ? singleCat.createdBy.name
                       : 'Unknown Creator'}
                   </span>
                 </p>
               </div>
-              <div>
+              <div className='flex items-center justify-end gap-2'>
                 <div className='text-primaryDark text-sm flex items-center gap-2'>view deatils <BiDownArrowCircle className='text-xl group-data-[open]:rotate-180' /></div>
+                <DeleteCard pathName='category' id={singleCat._id} tags='allCat' />
               </div>
             </div>
           </div>
