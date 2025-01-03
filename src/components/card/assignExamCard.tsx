@@ -5,6 +5,7 @@ import NoItemFound from '../notfound'
 import Skeleton from '../skeleton'
 import TablePagination from '../pagination/TablePagination'
 import Moment from 'react-moment';
+import DeleteCard from './deleteCard'
 
 interface AssignedExamProps {
     assignedExam: {
@@ -32,6 +33,7 @@ export default function AssignExamCard({ assignedExam, setPage, setLimit, pageLi
                                 <th scope="col" className="px-6 py-3"> Assigned Date</th>
                                 <th scope="col" className="px-6 py-3">Status</th>
                                 <th scope="col" className="px-6 py-3">Link</th>
+                                <th scope="col" className="px-6 py-3"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,6 +53,9 @@ export default function AssignExamCard({ assignedExam, setPage, setLimit, pageLi
                                         </td>
                                         <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             <Link href={`/start-exam/${exam.examLink}`} target="_blank" className='text-supportingMegenda underline'>View</Link>
+                                        </td>
+                                        <td>
+                                            <DeleteCard pathName='examAssignment' id={exam?._id} tags='examAssignment' />
                                         </td>
                                     </tr>
                                 )

@@ -42,7 +42,7 @@ export default function DeleteCard({ pathName, id, tags }: DeleteCardProps) {
         }
         if (!respose?.success) {
             setOpen(false)
-            toast.success(respose.message)
+            toast.error(respose.error)
         }
     }
 

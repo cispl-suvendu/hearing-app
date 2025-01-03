@@ -55,23 +55,23 @@ export async function POST(req: Request, { params }: { params: Promise<{ examLin
             );
         }
 
-         // Calculate result
-         const totalMarks = currentAssignment.examId.questions.length;
-         let score = 0;
-         const result = currentAssignment.examId.questions.map((question: any) => {
-             const submittedAnswer = answer.find(
-                 (ans: any) => ans.questionId === question._id.toString()
-             );
- 
-             const isCorrect = submittedAnswer?.correctAns.toLowerCase() === question.isCorrect.toLowerCase();
-             if (isCorrect) score++;
- 
-             return {
-                 ...question.toObject(),
-                 isSelected: submittedAnswer?.correctAns || '',
-                 isAnsCorrect: isCorrect,
-             };
-         });
+        // Calculate result
+        const totalMarks = currentAssignment.examId.questions.length;
+        let score = 0;
+        const result = currentAssignment.examId.questions.map((question: any) => {
+            const submittedAnswer = answer.find(
+                (ans: any) => ans.questionId === question._id.toString()
+            );
+
+            const isCorrect = submittedAnswer?.correctAns.toLowerCase() === question.isCorrect.toLowerCase();
+            if (isCorrect) score++;
+
+            return {
+                ...question.toObject(),
+                isSelected: submittedAnswer?.correctAns || '',
+                isAnsCorrect: isCorrect,
+            };
+        });
 
         // Update assignment details
         currentAssignment.status = 'completed';
@@ -129,11 +129,35 @@ export async function GET(req: Request, { params }: { params: Promise<{ examLink
             })
             .populate('assignedBy', 'name');
 
+            if (assignments.length === 0) {
+                return NextResponse.json({ success: false, error: "Assignment not found" }, { status: 404 });
+            }
+
         return NextResponse.json({ success: true, data: assignments }, { status: 200 });
     } catch (error: any) {
         return NextResponse.json(
             { success: false, message: 'Failed to retrieve assignments.', error: error.message },
             { status: 500 }
         );
+    }
+}
+
+
+export async function DELETE(req: Request, { params }: { params: Promise<{ examLink: string }> }) {
+    // Await the params
+    const examLink = (await params).examLink
+
+    try {
+        await connectToDB();
+        const assignments = await ExamAssignment.findByIdAndDelete(examLink);
+
+        if (!assignments) {
+            return NextResponse.json({ success: false, error: "Assignment not found" }, { status: 404 });
+        }
+
+        return NextResponse.json({ success: true, message: "Assignment deleted successfully" }, { status: 200 });
+
+    } catch (error: any) {
+        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
     }
 }

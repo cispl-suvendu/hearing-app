@@ -1,5 +1,6 @@
 import { connectToDB } from "@/lib/database";
 import User from "@/models/user";
+import { NextResponse } from "next/server";
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
     // Await the params
@@ -49,23 +50,22 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
     // Await the params
     const { id } = await params;
-
+  
     try {
         await connectToDB();
         const user = await User.findByIdAndDelete(id);
-
+  
         if (!user) {
-            return new Response(JSON.stringify({ error: "User not found" }), { status: 404 });
+            return NextResponse.json({ success: false, error: "User not found" }, { status: 404 });
         }
-
-        return new Response(JSON.stringify({ message: "User deleted successfully" }), {
-            headers: { 'Content-Type': 'application/json' },
-            status: 200,
-        });
+  
+        return NextResponse.json({ success: true, message: "User deleted successfully"}, { status: 200 });
+  
     } catch (error: any) {
-        return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
     }
-}
+  }
