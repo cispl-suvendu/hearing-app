@@ -15,11 +15,11 @@ const AssignmentsStatistics = memo(({ allAssignedExam }: AssignmentsStatisticsPr
                 <h2 className='text-sm capitalize mb-6 mt-1 text-supportingSky font-bold'>Recently Completed Assignment</h2>
                 <div className='flex justify-between items-center mb-4 pb-4 border-b'>
                     <div className='w-1/2'>
-                        <p className='text-xs text-grayText mb-1'>Assigne name</p>
+                        <p className='text-xs text-grayText mb-1'>Assignee name</p>
                         <p className='text-sm font-semibold'>{lastCompletedExam?.userName}</p>
                     </div>
                     <div className='w-1/2'>
-                        <p className='text-xs text-grayText mb-1'>Assigne email</p>
+                        <p className='text-xs text-grayText mb-1'>Assignee email</p>
                         <p className='text-sm font-semibold'>{lastCompletedExam?.userEmail}</p>
                     </div>
                 </div>
