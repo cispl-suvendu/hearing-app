@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useMemo } from 'react'
 import Moment from 'react-moment'
 
 interface AssignmentsStatisticsProps {
@@ -8,9 +8,9 @@ interface AssignmentsStatisticsProps {
 }
 
 export default function AssignmentsStatistics({ allAssignedExam }: AssignmentsStatisticsProps) {
-    const lastCompletedExam = allAssignedExam.find((exam: any) => exam.status === 'completed')
+    const lastCompletedExam = useMemo(() => allAssignedExam.find((exam: any) => exam.status === 'completed'), [allAssignedExam])
     return (
-        <div>
+        <>
             <div className='bg-white p-4 px-6 rounded-xl flex-1'>
                 <h2 className='text-sm capitalize mb-6 mt-1 text-supportingSky font-bold'>Recently Completed Assignment</h2>
                 <div className='flex justify-between items-center mb-4 pb-4 border-b'>
@@ -49,6 +49,6 @@ export default function AssignmentsStatistics({ allAssignedExam }: AssignmentsSt
                     <Link className='btnPrimary w-full block text-center' href={`/start-exam/${lastCompletedExam?.examLink}`} target='_blank'>View Details</Link>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
