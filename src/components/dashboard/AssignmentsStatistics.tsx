@@ -1,13 +1,13 @@
 'use client'
 import Link from 'next/link'
-import React, { useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 import Moment from 'react-moment'
 
 interface AssignmentsStatisticsProps {
     allAssignedExam: any
 }
 
-export default function AssignmentsStatistics({ allAssignedExam }: AssignmentsStatisticsProps) {
+const AssignmentsStatistics = memo(({ allAssignedExam }: AssignmentsStatisticsProps) => {
     const lastCompletedExam = useMemo(() => allAssignedExam.find((exam: any) => exam.status === 'completed'), [allAssignedExam])
     return (
         <>
@@ -51,4 +51,6 @@ export default function AssignmentsStatistics({ allAssignedExam }: AssignmentsSt
             </div>
         </>
     )
-}
+})
+
+export default AssignmentsStatistics

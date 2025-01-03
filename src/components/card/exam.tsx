@@ -1,19 +1,19 @@
 'use client'
-import React from 'react'
+import React, { memo } from 'react'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { BiDownArrowCircle } from "react-icons/bi";
 import { TbUserHexagon } from "react-icons/tb";
 import DifficultyLevel from '../difficulty';
 import { IExam } from '@/type';
 import { Suspense } from 'react';
-import ExamDeatilsCard from './examDeatilsCard';
 import Skeleton from '../skeleton';
+const ExamDeatilsCard = React.lazy(() => import('./examDeatilsCard'));
 
 interface ExamCardProps {
     exam: IExam
 }
 
-export default function ExamCard({ exam }: ExamCardProps) {
+const ExamCard = memo(({ exam }: ExamCardProps) => {
     return (
         <div className='bg-white p-4 px-6 rounded-md'>
             <Disclosure>
@@ -65,4 +65,6 @@ export default function ExamCard({ exam }: ExamCardProps) {
             </Disclosure>
         </div>
     )
-}
+})
+
+export default ExamCard

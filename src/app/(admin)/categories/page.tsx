@@ -5,8 +5,9 @@ import { ICategory } from '@/type'
 import ErrorMessage from '@/components/error'
 import NoItemFound from '@/components/notfound'
 import CatHeader from '../../../components/header/catHeader'
-// export const dynamic = "force-dynamic";
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
+import Skeleton from '@/components/skeleton'
 
 
 export const metadata: Metadata = {
@@ -36,7 +37,9 @@ export default async function Page() {
       <div className='flex flex-col gap-3'>
         {allCat?.map((cat: ICategory) => {
           return (
-            <CategoryCard key={cat._id} singleCat={cat} />
+            <Suspense key={cat._id} fallback={<Skeleton />}>
+              <CategoryCard key={cat._id} singleCat={cat} />
+            </Suspense>
           )
         })}
       </div>

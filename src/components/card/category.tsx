@@ -1,17 +1,16 @@
-import React, { Suspense } from 'react'
+import React, { memo, Suspense } from 'react'
 import { ICategory } from '@/type'
 import { TbUserHexagon } from "react-icons/tb";
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { BiDownArrowCircle } from "react-icons/bi";
-// const LazyComponentSubCat = React.lazy(() => import('../subCategory'));
+const LazyComponentSubCat = React.lazy(() => import('../subCategory'));
 import Skeleton from '../skeleton';
-import SubCategoryLayout from '../subCategory';
 import DeleteCard from './deleteCard';
 interface CategoryCardProps {
   singleCat: ICategory;
 }
 
-export default function CategoryCard({ singleCat }: CategoryCardProps) {
+const CategoryCard = memo(({ singleCat }: CategoryCardProps) => {
   return (
     <div className='bg-white p-4 px-6 rounded-md relative'>
       <Disclosure>
@@ -40,10 +39,12 @@ export default function CategoryCard({ singleCat }: CategoryCardProps) {
         </DisclosureButton>
         <DisclosurePanel className="bg-white mt-4 pt-4 text-sm border-t">
           <Suspense fallback={<Skeleton />}>
-            <SubCategoryLayout catId={singleCat._id} createdBy={singleCat.createdBy} />
+            <LazyComponentSubCat catId={singleCat._id} createdBy={singleCat.createdBy} />
           </Suspense>
         </DisclosurePanel>
       </Disclosure>
     </div>
   )
-}
+})
+
+export default CategoryCard

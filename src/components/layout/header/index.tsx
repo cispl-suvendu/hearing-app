@@ -1,7 +1,6 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import { LiaHireAHelper } from "react-icons/lia";
 import { IoIosMenu } from "react-icons/io";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
@@ -19,7 +18,7 @@ interface HeaderProps {
 
 export default function Header({ handleNavChange, activeNav }: HeaderProps) {
 
-    const {user} = useAuthContext()
+    const { user } = useAuthContext()
 
     const router = useRouter()
 

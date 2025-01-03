@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link';
-import React from 'react'
+import React, { memo } from 'react'
 import CountUp from 'react-countup';
 
 
@@ -11,7 +11,7 @@ interface AnimatedCountProps {
     link: string
 }
 
-export default function AnimatedCount({ title, Icon, total, link }: AnimatedCountProps) {
+const AnimatedCount = memo(({ title, Icon, total, link }: AnimatedCountProps) => {
     return (
         <div className='bg-white p-6 px-6 rounded-xl w-[47%]'>
             <div className='flex justify-between'>
@@ -26,4 +26,6 @@ export default function AnimatedCount({ title, Icon, total, link }: AnimatedCoun
             </div>
         </div>
     )
-}
+})
+
+export default AnimatedCount

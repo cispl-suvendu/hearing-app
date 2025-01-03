@@ -5,10 +5,9 @@ import ErrorMessage from '../error'
 import SubCategoryCard from '../card/subCategory'
 import NoItemFound from '../notfound'
 import { ISubcategory } from '@/type'
-// const LazyAddSubCat = React.lazy(() => import('../form/addSubCat'))
+const LazyAddSubCat = React.lazy(() => import('../form/addSubCat'))
 import { Types } from 'mongoose';
 import Skeleton from '../skeleton'
-import AddSubCat from '../form/addSubCat'
 
 
 interface SubCategoryLayoutProps {
@@ -67,11 +66,13 @@ export default function SubCategoryLayout({ catId, createdBy }: SubCategoryLayou
         <h2>{!showAddForm ? 'All Sub Category' : 'Add Sub Category'}</h2>
         <button className={showAddForm ? 'btnClose' : 'btnPrimary'} onClick={() => handleShowForm()}>{showAddForm ? 'Close' : 'Add'}</button>
       </div>
-      {showAddForm ? <Suspense fallback={<Skeleton />}><AddSubCat catId={catId} createdBy={createdBy} reFetch={setReFetchCat} closeAddForm={handleShowForm} /></Suspense> : <>
+      {showAddForm ? <Suspense fallback={<Skeleton />}><LazyAddSubCat catId={catId} createdBy={createdBy} reFetch={setReFetchCat} closeAddForm={handleShowForm} /></Suspense> : <>
         <div className='flex gap-2'>
           {SubCat.data.map((data: ISubcategory, index) => {
             return (
-              <SubCategoryCard key={index} subCat={data} reFetch={setReFetchCat} />
+              <Suspense key={index} fallback={<Skeleton />}>
+                <SubCategoryCard key={index} subCat={data} reFetch={setReFetchCat} />
+              </Suspense>
             )
           })}
         </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import UserHeader from '@/components/header/userHeader'
 import { getAllData } from '@/lib/getAll'
 import type { Metadata } from 'next'
@@ -6,7 +6,7 @@ import ErrorMessage from '@/components/error'
 import NoItemFound from '@/components/notfound'
 import { IUser } from '@/type'
 import UserCard from '@/components/card/userCard'
-// export const dynamic = "force-dynamic";
+import Skeleton from '@/components/skeleton'
 
 export const metadata: Metadata = {
     title: 'Admin Users',
@@ -44,7 +44,9 @@ export default async function Page() {
                     <tbody>
                         {allUser?.map((user: IUser, index: number) => {
                             return (
-                                <UserCard key={index} user={user} />
+                                <Suspense key={index} fallback={<Skeleton />}>
+                                    <UserCard key={index} user={user} />
+                                </Suspense>
                             )
                         })}
                     </tbody>

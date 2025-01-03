@@ -1,11 +1,10 @@
 import React, { Suspense, useEffect, useState } from 'react'
 import { IExam, IExamAssignment } from '@/type'
-import AssignExam from '../form/assignExam'
-import AssignExamCard from './assignExamCard'
 import toast from 'react-hot-toast'
 import { getDataById } from '@/lib/getById'
 import Skeleton from '../skeleton'
-
+const AssignExam = React.lazy(() => import('../form/assignExam'));
+const AssignExamCard = React.lazy(() => import('./assignExamCard'));
 interface ExamDeatilsCardProps {
     exam: IExam
 }

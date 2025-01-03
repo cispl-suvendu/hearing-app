@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import ExamHeader from '@/components/header/examHeader'
 import { Metadata } from 'next'
 import { getAllData } from '@/lib/getAll'
@@ -8,6 +8,7 @@ import NoItemFound from '@/components/notfound'
 import ExamCard from '@/components/card/exam';
 import { IExam, PageProps } from '@/type';
 import Pagination from '@/components/pagination';
+import Skeleton from '@/components/skeleton'
 
 export const metadata: Metadata = {
   title: 'Exams',
@@ -19,7 +20,7 @@ export default async function ExamPage({ searchParams }: PageProps) {
   const urlParams = await searchParams;
   const query = urlParams?.query || '';
   const currentPage = Number(urlParams?.page) || 1;
-  const limit = Number(urlParams?.limit) || 5;
+  const limit = Number(urlParams?.limit) || 10;
 
   const { success, data: allExam, error, pagination } = await getAllData({ pathName: 'exam', tag: 'allExam', query, currentPage, limit })
 
@@ -42,11 +43,15 @@ export default async function ExamPage({ searchParams }: PageProps) {
       <div className='flex flex-col gap-3'>
         {allExam.map((exam: IExam, index: number) => {
           return (
-            <ExamCard key={index} exam={exam} />
+            <Suspense key={index} fallback={<Skeleton />}>
+              <ExamCard key={index} exam={exam} />
+            </Suspense>
           )
         })}
       </div>
-      <Pagination pagination={pagination} />
+      <Suspense fallback={<Skeleton />}>
+        <Pagination pagination={pagination} />
+      </Suspense>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { getAllData } from '@/lib/getAll'
-import React from 'react'
+import React, { Suspense } from 'react'
 import QuestionHeader from '@/components/header/questionHeader'
 import type { Metadata } from 'next'
 import ErrorMessage from '@/components/error'
@@ -9,6 +9,7 @@ import { IQuestion } from '@/type'
 // export const dynamic = "force-dynamic";
 import { PageProps } from '@/type'
 import Pagination from '@/components/pagination'
+import Skeleton from '@/components/skeleton'
 
 export const metadata: Metadata = {
   title: 'Questionnaires',
@@ -23,7 +24,7 @@ export default async function Questionnaire({ searchParams }: PageProps) {
 
   const query = urlParams?.query || '';
   const currentPage = Number(urlParams?.page) || 1;
-  const limit = Number(urlParams?.limit) || 5;
+  const limit = Number(urlParams?.limit) || 10;
 
   const { data: allQuestions, error, success, pagination } = await getAllData({ pathName: 'question', tag: 'allQuestion', query, currentPage, limit })
 
@@ -46,11 +47,15 @@ export default async function Questionnaire({ searchParams }: PageProps) {
       <div className='flex flex-col gap-3'>
         {allQuestions.map((question: IQuestion, index: number) => {
           return (
-            <Question key={index} question={question} />
+            <Suspense key={index} fallback={<Skeleton />}>
+              <Question key={index} question={question} />
+            </Suspense>
           )
         })}
       </div>
-      <Pagination pagination={pagination} />
+      <Suspense fallback={<Skeleton />}>
+        <Pagination pagination={pagination} />
+      </Suspense>
     </div>
   )
 }

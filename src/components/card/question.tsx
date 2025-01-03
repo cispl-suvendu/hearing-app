@@ -1,18 +1,17 @@
 import { IQuestion } from '@/type'
-import React from 'react'
+import React, { memo } from 'react'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { BiDownArrowCircle } from "react-icons/bi";
 import { TbUserHexagon } from "react-icons/tb";
 import DifficultyLevel from '../difficulty';
 import DeleteCard from './deleteCard';
+const QuestionAns = React.lazy(() => import('./questionAsnCard'));
 
 interface QuestionProps {
     question: IQuestion
 }
 
-export default function Question({ question }: QuestionProps) {
-    const correctAns = `options_${question.isCorrect.toUpperCase()}`
-
+const Question = memo(({ question }: QuestionProps) => {
     return (
         <div className='bg-white p-4 px-6 rounded-md'>
             <Disclosure>
@@ -54,14 +53,13 @@ export default function Question({ question }: QuestionProps) {
                     </div>
                 </DisclosureButton>
                 <DisclosurePanel className="bg-white mt-4 pt-4 text-sm border-t">
-                    <ul className='flex gap-4 flex-wrap'>
-                        <li className={`rounded flex-[1_1_46%] px-4 py-2 ${correctAns === 'options_A' ? 'bg-green-500 text-white' : 'bg-skyLight'} capitalize`}>1. {question.options_A}</li>
-                        <li className={`rounded flex-[1_1_46%] px-4 py-2 ${correctAns === 'options_B' ? 'bg-green-500 text-white' : 'bg-skyLight'} capitalize`}>2. {question.options_B}</li>
-                        <li className={`rounded flex-[1_1_46%] px-4 py-2 ${correctAns === 'options_C' ? 'bg-green-500 text-white' : 'bg-skyLight'} capitalize`}>3. {question.options_C}</li>
-                        <li className={`rounded flex-[1_1_46%] px-4 py-2 ${correctAns === 'options_D' ? 'bg-green-500 text-white' : 'bg-skyLight'} capitalize`}>4. {question.options_D}</li>
-                    </ul>
+                    <QuestionAns question={question} />
                 </DisclosurePanel>
             </Disclosure>
         </div>
     )
-}
+})
+
+export default Question
+
+
