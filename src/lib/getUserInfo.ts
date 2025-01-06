@@ -9,7 +9,7 @@ export const getUserInfo = async () => {
     const token = cookieStore.get("login_token")?.value;
 
     if (!token) {
-        throw new Error("Token is missing or undefined.");
+        return null
     }
 
     try {

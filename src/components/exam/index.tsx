@@ -7,14 +7,27 @@ import { useFormik } from 'formik'
 import { startExamInitialValues, startExamType } from '@/formData/startExam'
 import { postAssignedExam, getAssignedExam } from '@/lib/getAssignedExam'
 import toast from 'react-hot-toast'
+import { getUserInfo } from '@/lib/getUserInfo'
 
 
 export default function ExamComponent({ exam }: any) {
+    const [isAdmin, setIsAdmin] = useState(false)
     const [timeEnd, setTimeEnd] = useState<boolean>(false)
     const [start, setStart] = useState<boolean>(true)
     const [showAnimation, setShowAnimation] = useState<boolean>(false)
     const [isExamCompleted, setIsExamCompleted] = useState<boolean>(false)
-    let updatedExam = null
+
+    const checkAdminInfo = async () => {
+        const response = await getUserInfo()
+        if (response?.email) {
+            setIsAdmin(true)
+        }
+    }
+
+    useEffect(() => {
+        checkAdminInfo()
+    }, [])
+
     const handleGetStatred = () => {
         setShowAnimation(prev => !prev)
         setTimeout(() => {
@@ -67,15 +80,15 @@ export default function ExamComponent({ exam }: any) {
     };
 
     useEffect(() => {
-        if (timeEnd) {
+        if (timeEnd && !isAdmin) {
             formik.handleSubmit()
         }
-    }, [timeEnd]); 
+    }, [timeEnd, isAdmin]);
 
     useEffect(() => {
         const handleBeforeUnload = (event: BeforeUnloadEvent) => {
             // Trigger form submission
-            if (!isExamCompleted && !start) {
+            if (!isExamCompleted && !start && !isAdmin) {
                 formik.handleSubmit();
             }
             // Customize the message if needed (some browsers may ignore it)
@@ -88,7 +101,7 @@ export default function ExamComponent({ exam }: any) {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [isExamCompleted, start]); // Re-run if `isExamCompleted` changes
+    }, [isExamCompleted, start, isAdmin]); // Re-run if `isExamCompleted` changes
 
     if (isExamCompleted) {
         return (
