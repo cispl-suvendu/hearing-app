@@ -14,7 +14,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         <AuthContextProvider>
             <div className='main-site'>
                 <Header handleNavChange={handleNavChange} activeNav={activeNav} />
-                <div className='flex'>
+                <div className='flex flex-col md:flex-row'>
                     <MainNavigation activeNav={activeNav} />
                     <MainContent activeNav={activeNav}>{children}</MainContent>
                 </div>

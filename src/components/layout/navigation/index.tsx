@@ -12,8 +12,8 @@ interface NavProps {
 export default function MainNavigation({ activeNav }: NavProps) {
     const pathname = usePathname()
     return (
-        <div className={`${activeNav ? 'w-1/6' : 'w-auto'} relative`}>
-            <div className='min-h-dvh py-8 px-6 pt-[7rem] bg-light'>
+        <div className={`${activeNav ? 'md:w-1/6 hidden' : 'md:w-auto block'} relative w-full md:block`}>
+            <div className='md:min-h-dvh py-8 px-6 pt-[7rem] bg-light'>
                 <ul className='mainNavigation'>
                     {MainNavLink.map((nav, index) => {
                         const navLink = nav.link
@@ -21,13 +21,13 @@ export default function MainNavigation({ activeNav }: NavProps) {
                             <li key={index}>
                                 <Link href={navLink} className={pathname == navLink ? 'active' : '-'}>
                                     <span className='navIcon'>{<nav.icon />}</span>
-                                    {activeNav && <span className='navLabel'>{nav.label}</span>}
+                                    <span className={activeNav ? 'navLabel active' : 'navLabel'}>{nav.label}</span>
                                 </Link>
                             </li>
                         )
                     })}
                 </ul>
-                {activeNav && <p className='text-xs text-grayText absolute left-4 bottom-10'>&copy; quizFy | Developed by <Link href='mailto:suvendu.chatterjee@codeclouds.in' className='text-primaryDark font-bold'>Suvendu</Link></p>}
+                {activeNav && <p className='text-xs text-grayText absolute left-4 bottom-10 hidden md:block'>&copy; quizFy | Developed by <Link href='mailto:suvendu.chatterjee@codeclouds.in' className='text-primaryDark font-bold'>Suvendu</Link></p>}
             </div>
         </div>
     )

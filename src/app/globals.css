@@ -482,3 +482,12 @@ input[type=file].inputStyle {
 .dash_loader_title{
   @apply text-supportingSky font-bold text-sm capitalize mb-4
 }
+
+@media (min-width:768px) {
+  .mainNavigation .navLabel{
+    display: none;
+  }
+  .mainNavigation .navLabel.active{
+    display: inline-block;
+  }
+}

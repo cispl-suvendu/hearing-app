@@ -15,11 +15,11 @@ export default async function Dashboard() {
   ]);
 
   return (
-    <div className="flex gap-4">
-      <div className="w-1/2">
+    <div className="flex flex-col md:flex-row gap-4">
+      <div className="md:w-1/2">
         <Suspense fallback={<Skeleton />}><AssignmentsStatistics allAssignedExam={allAssignedExam?.data} /></Suspense>
       </div>
-      <div className="w-1/2">
+      <div className="md:w-1/2">
         <div className="mb-4">
           <Suspense fallback={<Skeleton />}><Filter allAssignedExam={allAssignedExam?.data} /></Suspense>
         </div>

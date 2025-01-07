@@ -13,7 +13,7 @@ export default function ListCard({ assignedExam}: AssignedExamProps) {
     return (
         <>
             {assignedExam.data?.length === 0 && assignedExam.success ? <NoItemFound componentName='Assigned Exam' /> :
-                <div className='py-4'>
+                <div className='py-4 w-full overflow-auto'>
                     <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                             <tr>

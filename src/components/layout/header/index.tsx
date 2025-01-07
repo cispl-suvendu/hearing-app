@@ -39,7 +39,12 @@ export default function Header({ handleNavChange, activeNav }: HeaderProps) {
                         </Link>
                     </div>
                     <div className='menuTigger'>
-                        {activeNav ? <IoIosMenu onClick={() => handleNavChange()} /> : <AiOutlineCloseCircle onClick={() => handleNavChange()} />}
+                        <div className='hidden md:block'>
+                            {activeNav ? <IoIosMenu onClick={() => handleNavChange()} /> : <AiOutlineCloseCircle onClick={() => handleNavChange()} />}
+                        </div>
+                        <div className='md:hidden block'>
+                            {activeNav ? <IoIosMenu onClick={() => handleNavChange()} /> : <AiOutlineCloseCircle onClick={() => handleNavChange()} />}
+                        </div>
                     </div>
                 </div>
                 <div>

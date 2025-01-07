@@ -17,7 +17,7 @@ interface StatisticsProps {
 
 const Statistics = memo(({ allCat, allQuestions, allExam, allSubCat, allAssignedExam }: StatisticsProps) => {
   return (
-    <div className="flex gap-6 flex-wrap">
+    <div className="flex gap-6 flex-wrap flex-col md:flex-row">
       <Suspense fallback={<Skeleton />}>
         <AnimatedCount title="category" Icon={<TbBrandCodecov />} total={allCat.length} link="/categories" />
       </Suspense>
