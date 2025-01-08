@@ -37,7 +37,7 @@ export async function sendExamNotification({
                     <table>
                         <tr>
                             <td>
-                                <img src={process.env.NEXT_URL/logo_img.png} alt="quizyFy" width="24" />
+                                <img src="${process.env.NEXT_URL}/logo_img.png" alt="quizyFy" width="24" />
                             </td>
                             <td><div style="color:#4b49ac;font-weight: 700;font-size:16px;">quizyFy</div></td>
                         </tr>
