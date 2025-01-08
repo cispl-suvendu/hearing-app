@@ -58,6 +58,7 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
     try {
         await connectToDB();
         const user = await User.findByIdAndDelete(id);
+        //await Category.deleteMany({ createdBy: id });
   
         if (!user) {
             return NextResponse.json({ success: false, error: "User not found" }, { status: 404 });
