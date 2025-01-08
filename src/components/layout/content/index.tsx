@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
 import Heading from '../heading'
 import Skeleton from '@/components/skeleton'
+const LazyComponent = React.lazy(() => import('./lazyContent'));
 
 interface MainContentProps {
     children: React.ReactNode
@@ -12,7 +13,11 @@ export default function MainContent({ children, activeNav }: MainContentProps) {
         <div className={`${activeNav ? 'md:w-5/6' : 'md:w-full'} w-full`}>
             <div className='p-8 pt-[7rem] min-h-dvh bg-skyLight'>
                 <Heading />
-                <Suspense fallback={<PageLoader />}>{children}</Suspense>
+                <Suspense fallback={<PageLoader />}>
+                    <LazyComponent>
+                        {children}
+                    </LazyComponent>
+                </Suspense>
             </div>
         </div>
     )
