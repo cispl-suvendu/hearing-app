@@ -26,9 +26,9 @@ const Question = memo(({ question }: QuestionProps) => {
                                         <span>by</span>
                                         <span className='text-primaryDark'>
                                             {
-                                                question.categoryId && typeof question.categoryId === 'object' && 'name' in question.categoryId
-                                                    ? question.categoryId.name
-                                                    : 'Unknown categoryId'
+                                                question.createdBy && typeof question.createdBy === 'object' && 'name' in question.createdBy
+                                                    ? question.createdBy.name
+                                                    : 'Unknown User'
                                             }
                                         </span>
                                     </div>
