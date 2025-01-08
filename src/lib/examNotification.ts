@@ -32,21 +32,21 @@ export async function sendExamNotification({
             to: customerData.email,
             subject: `${customerData.name} Exam Assigned`,
             html: `
-                <div style="font-family: Arial, sans-serif; background-color:#f5f7ff; color: #333; padding: 20px;height:400px; position: relative;">
+                <div style="font-family: Arial, sans-serif; background-color:#f5f7ff; color: #333; padding: 20px;height:400px;">
                     <div style="margin-bottom:50px;">
                     <table>
                         <tr>
-                            <td>
-                                <img src="${process.env.NEXT_URL}/logo_img.png" alt="quizyFy" width="24" />
+                            <td valign="middle">
+                                <img src="${process.env.NEXT_URL}/logo_img.png" alt="quizyFy" width="60" />
                             </td>
-                            <td><div style="color:#4b49ac;font-weight: 700;font-size:16px;">quizyFy</div></td>
+                            <td valign="middle"><div style="color:#4b49ac;font-weight: 700;font-size:26px;">quizyFy</div></td>
                         </tr>
                     </table>
                     </div>
                     <h4 style="font-size:16px;font-family: Arial, sans-serif;margin-bottom: 20px;">Hello ${customerData.name}, Please check exam link below:</h4>
                     <div style="font-size: 14px;color: #7a7474;line-height:1.5;margin-bottom:40px;">We are excited to inform you that your exam link is now ready. Kindly review the instructions and access the link to proceed with the exam. Ensure you complete it within the specified time frame. If you encounter any issues or have questions, don't hesitate to reach out to us for assistance.</div>
                     <a href="${process.env.NEXT_URL}/start-exam/${customerData.link}" traget="_blank" style="background-color: #7978e9; color: #fff; padding:8px 20px; text-decoration:none;outline:none;font-size:16px">Exam Link</a>
-                    <div style="font-size: 12px;color: #7a7474;position: absolute;left: 30px;bottom: 30px;">&copy; quizFy | Developed by Suvendu </div>
+                    <div style="font-size: 12px;color: #7a7474;margin-top:80px;">&copy; quizFy | Developed by Suvendu </div>
                 </div>`,
         };
 
