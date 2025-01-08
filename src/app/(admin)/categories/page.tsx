@@ -33,8 +33,8 @@ export default async function Page() {
 
   return (
     <div>
-      <CatHeader />
       <Suspense fallback={<Skeleton />}>
+        <CatHeader />
         <div className='flex flex-col gap-3'>
           {allCat?.map((cat: ICategory) => {
             return (

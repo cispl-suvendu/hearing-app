@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { connectToDB } from '@/lib/database'; // Ensure a MongoDB connection function
 import Exam from '@/models/exam'; // Your Exam model
+import { ExamAssignment } from '@/models';
 
 
 export async function GET(req: Request) {
@@ -31,6 +32,7 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
   try {
       await connectToDB();
       const exam = await Exam.findByIdAndDelete(id);
+      await ExamAssignment.deleteMany({examId:id})
 
       if (!exam) {
           return NextResponse.json({ success: false, error: "Exam not found" }, { status: 404 });

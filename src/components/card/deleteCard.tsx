@@ -63,6 +63,9 @@ export default function DeleteCard({ pathName, id, tags, reFetch }: DeleteCardPr
                     <div>
                         <input type='text' placeholder='Type DELETE to confirm' className='w-full border border-gray-200 p-2 rounded' onChange={(e) => setInput(e.target.value)} value={input} />
                     </div>
+                    <div className='text-xs bg-skyLight p-2 mt-1'>
+                        Please Note: All the related data with this also be deleted with it
+                    </div>
                     <div className='flex justify-end gap-4'>
                         <button className='bg-red-500 text-white px-4 py-2 rounded disabled:opacity-35 disabled:cursor-not-allowed' disabled={inActive} onClick={() => startDelete()}>Delete</button> <button onClick={() => setOpen(false)} className='bg-gray-200 text-gray-500 px-4 py-2 rounded'>Cancel</button>
                     </div>

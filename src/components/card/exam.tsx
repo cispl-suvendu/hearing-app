@@ -7,6 +7,7 @@ import DifficultyLevel from '../difficulty';
 import { IExam } from '@/type';
 import { Suspense } from 'react';
 import Skeleton from '../skeleton';
+import DeleteCard from './deleteCard';
 const ExamDeatilsCard = React.lazy(() => import('./examDeatilsCard'));
 
 interface ExamCardProps {
@@ -51,8 +52,9 @@ const ExamCard = memo(({ exam }: ExamCardProps) => {
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div className='flex items-center justify-between mt-4 md:mt-0 md:justify-end gap-2'>
                                 <div className='text-primaryDark text-sm flex items-center gap-2'>view deatils <BiDownArrowCircle className='text-xl group-data-[open]:rotate-180' /></div>
+                                <DeleteCard pathName='exam' id={exam._id} tags='allExam' />
                             </div>
                         </div>
                     </div>

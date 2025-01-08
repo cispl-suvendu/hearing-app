@@ -1,6 +1,7 @@
 import { connectToDB } from "@/lib/database";
 import User from "@/models/user";
 import { NextResponse } from "next/server";
+import { Category, Subcategory, Question, Exam, ExamAssignment } from "@/models";
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
     // Await the params
@@ -58,7 +59,11 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
     try {
         await connectToDB();
         const user = await User.findByIdAndDelete(id);
-        //await Category.deleteMany({ createdBy: id });
+        await Category.deleteMany({ createdBy: id });
+        await Subcategory.deleteMany({createdBy:id})
+        await Question.deleteMany({createdBy:id})
+        await Exam.deleteMany({createdBy:id})
+        await ExamAssignment.deleteMany({assignedBy:id})
   
         if (!user) {
             return NextResponse.json({ success: false, error: "User not found" }, { status: 404 });

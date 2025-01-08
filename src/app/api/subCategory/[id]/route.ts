@@ -1,6 +1,7 @@
 import { connectToDB } from "@/lib/database";
 import Subcategory from "@/models/subcategory";
 import { NextResponse } from "next/server";
+import { Question, Exam, ExamAssignment } from "@/models";
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
     const { id } = await params;
@@ -57,12 +58,28 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     try {
         await connectToDB();
         const subcategory = await Subcategory.findByIdAndDelete(id);
+        await Question.deleteMany({ subcategoryId: id })
+        const assignmentsToDelete = await ExamAssignment.find()
+            .populate({
+                path: 'examId',
+                match: { subcategoryId: id },
+            });
+
+        const filteredAssignments = assignmentsToDelete.filter((assignment) => assignment.examId !== null);
+
+        // Extract the IDs of the assignments to delete
+        const assignmentIds = filteredAssignments.map((assignment) => assignment._id);
+
+        // Delete the filtered assignments
+        await ExamAssignment.deleteMany({ _id: { $in: assignmentIds } });
+        await Exam.deleteMany({ subcategoryId: id })
+
 
         if (!subcategory) {
             return NextResponse.json({ success: false, message: "Subcategory not found!" }, { status: 404 });
         }
-         return NextResponse.json({ success: true, message: "Subcategory deleted successfully" }, { status: 200 });
+        return NextResponse.json({ success: true, message: "Subcategory deleted successfully" }, { status: 200 });
     } catch (error: any) {
-        return NextResponse.json({ success: false,  error: error.message }, { status: 500 });
+        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
     }
 }

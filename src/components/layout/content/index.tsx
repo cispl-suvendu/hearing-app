@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import Heading from '../heading'
-import Skeleton from '@/components/skeleton'
+import SkeletonDash from '@/components/skeleton/skeletonDash'
 
 interface MainContentProps {
     children: React.ReactNode
@@ -13,34 +13,8 @@ export default function MainContent({ children, activeNav }: MainContentProps) {
             <div className='p-8 pt-[7rem] min-h-dvh bg-skyLight'>
                 <Heading />
                 {children}
-                {/* <Suspense fallback={<PageLoader />}>{children}</Suspense> */}
+                {/* <Suspense fallback={<SkeletonDash />}>{children}</Suspense> */}
             </div>
         </div>
-    )
-}
-
-export const PageLoader = () => {
-    return (
-        <>
-            <div className='top_loading flex gap-6'>
-                <div className='flex-1'>
-                    <Skeleton />
-                </div>
-                <div className='flex-1'>
-                    <Skeleton />
-                </div>
-            </div>
-            <div className='btm_loading flex flex-col gap-6 mt-6'>
-                <div className='flex-1'>
-                    <Skeleton />
-                </div>
-                <div className='flex-1'>
-                    <Skeleton />
-                </div>
-                <div className='flex-1'>
-                    <Skeleton />
-                </div>
-            </div>
-        </>
     )
 }
