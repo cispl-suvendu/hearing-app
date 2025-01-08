@@ -10,7 +10,7 @@ interface DeleteCardProps {
     pathName: string,
     id: string,
     tags: string,
-    reFetch?:any
+    reFetch?: any
 }
 
 export default function DeleteCard({ pathName, id, tags, reFetch }: DeleteCardProps) {
@@ -42,7 +42,10 @@ export default function DeleteCard({ pathName, id, tags, reFetch }: DeleteCardPr
         if (respose?.success) {
             setOpen(false)
             toast.success(respose.message)
-            reFetch(true)
+            if (reFetch) {
+                reFetch(true)
+            }
+
         }
         if (!respose?.success) {
             setOpen(false)

@@ -1,2 +1,11 @@
 Question,Option- A,Option- B,Option- C,Option- D,Right option,Complexity
-Full form of HTML,this is language,this is script,this is test,Need to decide,c,3
+Full form of HTML,this is language,this is script,this is test,HyperText Markup Language,D,1
+Which tag is used for a hyperlink?,<link>,<a>,<href>,<url>,B,1
+What does <br> do in HTML?,Adds bold text,Breaks a line,Adds a table,Creates a button,B,1
+Default file extension for HTML documents?,.doc,.html,.ht,.xml,B,1
+Which attribute sets an image source?,href,src,alt,value,B,1
+What is a semantic tag in HTML?,<div>,<span>,<article>,<bold>,C,1
+What is the default HTML version?,HTML5,HTML4,XHTML,SGML,A,1
+What is the root element in HTML?,<head>,<body>,<html>,<root>,C,1
+Which tag is used for unordered lists?,<ul>,<ol>,<li>,<list>,A,1
+How to comment in HTML?,<!-- comment -->,// comment,/* comment */,# comment,A,1
