@@ -12,7 +12,8 @@ export default function MainContent({ children, activeNav }: MainContentProps) {
         <div className={`${activeNav ? 'md:w-5/6' : 'md:w-full'} w-full`}>
             <div className='p-8 pt-[7rem] min-h-dvh bg-skyLight'>
                 <Heading />
-                <Suspense fallback={<PageLoader />}>{children}</Suspense>
+                {children}
+                {/* <Suspense fallback={<PageLoader />}>{children}</Suspense> */}
             </div>
         </div>
     )
