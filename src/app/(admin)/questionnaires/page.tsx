@@ -44,15 +44,15 @@ export default async function Questionnaire({ searchParams }: PageProps) {
   return (
     <div>
       <QuestionHeader />
-      <div className='flex flex-col gap-3'>
-        {allQuestions.map((question: IQuestion, index: number) => {
-          return (
-            <Suspense key={index} fallback={<Skeleton />}>
+      <Suspense fallback={<Skeleton />}>
+        <div className='flex flex-col gap-3'>
+          {allQuestions.map((question: IQuestion, index: number) => {
+            return (
               <Question key={index} question={question} />
-            </Suspense>
-          )
-        })}
-      </div>
+            )
+          })}
+        </div>
+      </Suspense>
       <Suspense fallback={<Skeleton />}>
         <Pagination pagination={pagination} />
       </Suspense>

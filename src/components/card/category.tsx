@@ -17,8 +17,8 @@ const CategoryCard = memo(({ singleCat }: CategoryCardProps) => {
         <DisclosureButton className='w-full group'>
           <div className='group-data-[open]:'>
             <div className='flex justify-between items-center flex-wrap'>
-              <div className='text-left w-3/4'>
-                <h3 className='text-md'>{singleCat.name}</h3>
+              <div className='text-left w-full md:w-3/4'>
+                <h3 className='text-md capitalize'>{singleCat.name}</h3>
                 <p className='text-sm text-grayText'>{singleCat.description}</p>
                 <p className='text-xs text-grayText flex items-center gap-1 mt-2'>
                   <TbUserHexagon />
@@ -30,7 +30,7 @@ const CategoryCard = memo(({ singleCat }: CategoryCardProps) => {
                   </span>
                 </p>
               </div>
-              <div className='flex items-center justify-end gap-2'>
+              <div className='flex items-center justify-between md:justify-end gap-2 w-full md:w-auto mt-4 md:mt-0'>
                 <div className='text-primaryDark text-sm flex items-center gap-2'>view deatils <BiDownArrowCircle className='text-xl group-data-[open]:rotate-180' /></div>
                 <DeleteCard pathName='category' id={singleCat._id} tags='allCat' />
               </div>

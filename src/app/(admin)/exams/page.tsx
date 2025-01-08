@@ -40,15 +40,15 @@ export default async function ExamPage({ searchParams }: PageProps) {
   return (
     <div>
       <ExamHeader />
-      <div className='flex flex-col gap-3'>
-        {allExam.map((exam: IExam, index: number) => {
-          return (
-            <Suspense key={index} fallback={<Skeleton />}>
+      <Suspense fallback={<Skeleton />}>
+        <div className='flex flex-col gap-3'>
+          {allExam.map((exam: IExam, index: number) => {
+            return (
               <ExamCard key={index} exam={exam} />
-            </Suspense>
-          )
-        })}
-      </div>
+            )
+          })}
+        </div>
+      </Suspense>
       <Suspense fallback={<Skeleton />}>
         <Pagination pagination={pagination} />
       </Suspense>

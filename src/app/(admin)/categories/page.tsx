@@ -34,15 +34,15 @@ export default async function Page() {
   return (
     <div>
       <CatHeader />
-      <div className='flex flex-col gap-3'>
-        {allCat?.map((cat: ICategory) => {
-          return (
-            <Suspense key={cat._id} fallback={<Skeleton />}>
+      <Suspense fallback={<Skeleton />}>
+        <div className='flex flex-col gap-3'>
+          {allCat?.map((cat: ICategory) => {
+            return (
               <CategoryCard key={cat._id} singleCat={cat} />
-            </Suspense>
-          )
-        })}
-      </div>
+            )
+          })}
+        </div>
+      </Suspense>
     </div>
   )
 }

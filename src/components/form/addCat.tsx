@@ -37,7 +37,7 @@ export default function AddCat() {
 
     return (
         <form onSubmit={formik.handleSubmit}>
-            <div className='flex justify-between gap-2'>
+            <div className='flex flex-col md:flex-row md:justify-between gap-2'>
                 <div className='inptHldr flex-1'>
                     <input
                         type="text"
@@ -67,7 +67,7 @@ export default function AddCat() {
                     ) : null}
                 </div>
                 <div className='btnHldr'>
-                    <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add info' : 'Add'}</button>
+                    <button type="submit" className='btnPrimary w-full' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add info' : 'Add'}</button>
                 </div>
             </div>
         </form>

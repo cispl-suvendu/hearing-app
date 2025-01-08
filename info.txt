@@ -1,5 +1,31 @@
---------USER-------------
+hello, I have created a Quiz App 'Quizfy' useing nextjs, 
+please review the app share your feedback
 
-1. user password encription pending
-2. Admin creation restrication pending
+link:
+https://hearing-app-virid.vercel.app/
 
+login credentials:
+admin@quizfy.com
+Admin1234
+
+
+Exam link:
+https://hearing-app-virid.vercel.app/start-exam/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJ0ZXN0QGRldmNsb3VkczEuY29tIiwidXNlck5hbWUiOiJUZXN0IE5hbWUiLCJpYXQiOjE3MzYzMTc2MjEsImV4cCI6MTc2Nzg3NTIyMX0.Ed4zPbbVOVkapETdRvHHRq_SFbvYqoqY4EiN4TU05OQ
+
+
+github:
+https://github.com/cispl-suvendu/hearing-app
+
+--------------------------------
+
+
+Features for Admin:
+1. Manage Categories and Subcategories: Add and organize quiz topics.
+2. Add Questions: Create questions or upload them in bulk using a CSV file.
+3. Create Exams: Combine questions into quizzes.
+4. Assign Exams: Send quizzes to users via email.
+5. Review Exams: Check and evaluate completed quizzes.
+6. Manage Admin Users: Add other admins to help manage the platform.
+
+Technology:
+nextjs, react, tailwind, ts, mongodb, html

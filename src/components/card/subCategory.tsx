@@ -12,9 +12,9 @@ export default function SubCategoryCard({ subCat, reFetch }: SubCategoryCardProp
   const [update, setUpdate] = React.useState<boolean>(false)
 
   return (
-    <div className='px-2 py-2 bg-skyLight'>
-      <span className='text-black capitalize'>{subCat.name}</span>
-      <DeleteCard pathName='subCategory' id={subCat._id} tags='allSubcat'/>
+    <div className='px-2 py-2 bg-skyLight flex rounded items-center'>
+      <span className='text-black capitalize p-2'>{subCat.name}</span>
+      <DeleteCard pathName='subCategory' id={subCat._id} tags='allSubcat' reFetch={reFetch}/>
     </div>
   )
 }

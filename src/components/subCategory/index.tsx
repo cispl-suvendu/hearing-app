@@ -58,8 +58,6 @@ export default function SubCategoryLayout({ catId, createdBy }: SubCategoryLayou
     return <ErrorMessage errorDetail={SubCat.error} />
   }
 
-  console.log('reFetchCat', reFetchCat)
-
   return (
     <>
       <div className='flex justify-between mb-2'>
@@ -67,7 +65,7 @@ export default function SubCategoryLayout({ catId, createdBy }: SubCategoryLayou
         <button className={showAddForm ? 'btnClose' : 'btnPrimary'} onClick={() => handleShowForm()}>{showAddForm ? 'Close' : 'Add'}</button>
       </div>
       {showAddForm ? <Suspense fallback={<Skeleton />}><LazyAddSubCat catId={catId} createdBy={createdBy} reFetch={setReFetchCat} closeAddForm={handleShowForm} /></Suspense> : <>
-        <div className='flex gap-2'>
+        <div className='flex gap-2 flex-wrap'>
           {SubCat.data.map((data: ISubcategory, index) => {
             return (
               <Suspense key={index} fallback={<Skeleton />}>

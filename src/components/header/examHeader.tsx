@@ -1,7 +1,8 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import AddExam from '../form/addExam'
 import { getAllData } from '@/lib/getAll'
+import Skeleton from '../skeleton';
 
 export default function ExamHeader() {
     const [categories, setCategories] = useState([]);
@@ -18,7 +19,7 @@ export default function ExamHeader() {
     return (
         <div className='bg-white py-2 px-4 mb-4'>
             <h2 className='text-sm mb-2'>Create Exam</h2>
-            <AddExam categories={categories} subCategories={subCategories}  />
+            <Suspense fallback={<Skeleton />}><AddExam categories={categories} subCategories={subCategories} /></Suspense>
         </div>
     )
 }

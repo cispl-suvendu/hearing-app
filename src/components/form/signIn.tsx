@@ -28,8 +28,8 @@ export default function SignIn() {
             formik.resetForm()
             toast.success(message);
             setShowLoading(success)
-            //router.push('/dashboard')
-            window.location.replace('/dashboard')
+            router.push('/dashboard')
+            //window.location.replace('/dashboard')
         }
         if (!success) {
             toast.error(error);

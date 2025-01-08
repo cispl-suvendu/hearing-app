@@ -53,7 +53,7 @@ export default function AddQuestion({ categories, subCategories }: AddQuestionPr
 
     return (
         <form onSubmit={formik.handleSubmit}>
-            <div className='flex justify-between gap-2'>
+            <div className='flex flex-col md:flex-row md:justify-between gap-2 flex-wrap'>
                 <div className='inptHldr flex-1'>
                     <select value={formik.values.categoryId} onChange={formik.handleChange} className='inputStyle' name='categoryId' onBlur={formik.handleBlur}>
                         <option value=''>Select Category</option>

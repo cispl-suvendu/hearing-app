@@ -35,7 +35,7 @@ export default function Pagination({ pagination }: PaginationProps) {
         setPageLimit(Number(pageLimit))
     }
     return (
-        <div className='mt-6 flex gap-6 justify-between'>
+        <div className='mt-6 flex flex-col md:flex-row gap-6 justify-between'>
             <div className='bg-white px-4 rounded text-xs text-gray-500 flex items-center justify-center'>
                 Shwoing {total > page * limit ? page * limit : total} of {total}
             </div>
@@ -49,7 +49,7 @@ export default function Pagination({ pagination }: PaginationProps) {
                     <option>100</option>
                 </select>
             </div>
-            <div className='flex gap-2'>
+            <div className='flex gap-2 flex-wrap'>
                 {countArray.map(i => {
                     return (
                         <div onClick={() => page !== i && createPageURL(i)} key={i} className={`px-4 py-2 rounded ${page == i ? 'bg-gray-500 text-white cursor-not-allowed' : 'cursor-pointer bg-white'}`}>{i}</div>

@@ -1,5 +1,6 @@
 import { connectToDB } from "@/lib/database";
 import Subcategory from "@/models/subcategory";
+import { NextResponse } from "next/server";
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
     const { id } = await params;
@@ -58,14 +59,10 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
         const subcategory = await Subcategory.findByIdAndDelete(id);
 
         if (!subcategory) {
-            return new Response(JSON.stringify({ error: "Subcategory not found" }), { status: 404 });
+            return NextResponse.json({ success: false, message: "Subcategory not found!" }, { status: 404 });
         }
-
-        return new Response(JSON.stringify({ message: "Subcategory deleted successfully" }), {
-            headers: { 'Content-Type': 'application/json' },
-            status: 200,
-        });
+         return NextResponse.json({ success: true, message: "Subcategory deleted successfully" }, { status: 200 });
     } catch (error: any) {
-        return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+        return NextResponse.json({ success: false,  error: error.message }, { status: 500 });
     }
 }

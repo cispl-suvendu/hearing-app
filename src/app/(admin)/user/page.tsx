@@ -32,27 +32,26 @@ export default async function Page() {
     return (
         <div>
             <UserHeader />
-            <div className='flex flex-col gap-3'>
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
-                        <tr>
-                            <th scope="col" className="px-6 py-3">Name</th>
-                            <th scope="col" className="px-6 py-3">Email</th>
-                            <th scope="col" className="px-6 py-3">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {allUser?.map((user: IUser, index: number) => {
-                            return (
-                                <Suspense key={index} fallback={<Skeleton />}>
+            <Suspense fallback={<Skeleton />}>
+                <div className='flex flex-col gap-3'>
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+                            <tr>
+                                <th scope="col" className="px-6 py-3">Name</th>
+                                <th scope="col" className="px-6 py-3">Email</th>
+                                <th scope="col" className="px-6 py-3">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {allUser?.map((user: IUser, index: number) => {
+                                return (
                                     <UserCard key={index} user={user} />
-                                </Suspense>
-                            )
-                        })}
-                    </tbody>
-                </table>
-
-            </div>
+                                )
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </Suspense>
         </div>
     )
 }

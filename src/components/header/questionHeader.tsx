@@ -1,9 +1,10 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import AddQuestion from '../form/addQuestion'
 import { GrDocumentCsv } from "react-icons/gr";
 import Link from 'next/link'
 import { getAllData } from '@/lib/getAll';
+import Skeleton from '../skeleton';
 
 export default function QuestionHeader() {
 
@@ -29,7 +30,7 @@ export default function QuestionHeader() {
                 <Link href={csvLink} className='text-xs text-green-600 cursor-pointer flex items-center gap-1 font-bold' download><GrDocumentCsv />
                     (Sample CSV)</Link>
             </div>
-            <AddQuestion categories={categories} subCategories={subCategories}  />
+            <Suspense fallback={<Skeleton />}><AddQuestion categories={categories} subCategories={subCategories} /></Suspense>
         </div>
     )
 }

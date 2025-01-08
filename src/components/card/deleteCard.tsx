@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdOutlineDelete } from "react-icons/md";
 import Modal from '../modal';
 import { handleDelete } from '../../lib/handleDelete';
@@ -10,14 +10,16 @@ interface DeleteCardProps {
     pathName: string,
     id: string,
     tags: string,
+    reFetch?:any
 }
 
-export default function DeleteCard({ pathName, id, tags }: DeleteCardProps) {
+export default function DeleteCard({ pathName, id, tags, reFetch }: DeleteCardProps) {
+
     const [open, setOpen] = React.useState(false)
     const [input, setInput] = React.useState('')
     const [inActive, setInActive] = React.useState(true)
     const checkInput = () => {
-        if (input === 'confirm') {
+        if (input === 'DELETE') {
             setInActive(false)
         }
     }
@@ -35,15 +37,18 @@ export default function DeleteCard({ pathName, id, tags }: DeleteCardProps) {
 
 
     const startDelete = async () => {
+        setInActive(true)
         const respose = await handleDelete({ pathName, id, tags })
         if (respose?.success) {
             setOpen(false)
             toast.success(respose.message)
+            reFetch(true)
         }
         if (!respose?.success) {
             setOpen(false)
-            toast.error(respose.error)
+            toast.error(respose.error || respose.message)
         }
+        setInActive(false)
     }
 
     return (

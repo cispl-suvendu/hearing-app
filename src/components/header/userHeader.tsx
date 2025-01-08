@@ -1,6 +1,7 @@
 'use client'
-import React from 'react'
+import React, { Suspense } from 'react'
 import AddUser from '../form/addUser'
+import Skeleton from '../skeleton'
 
 export default function UserHeader() {
 
@@ -9,7 +10,9 @@ export default function UserHeader() {
             <div className='flex gap-4 mb-2 items-end'>
                 <h2 className='text-sm'>Create User</h2>
             </div>
-            <AddUser />
+            <Suspense fallback={<Skeleton />}>
+                <AddUser />
+            </Suspense>
         </div>
     )
 }

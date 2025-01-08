@@ -17,10 +17,10 @@ const Question = memo(({ question }: QuestionProps) => {
             <Disclosure>
                 <DisclosureButton className='w-full group'>
                     <div className='group-data-[open]:'>
-                        <div className='flex justify-between items-center'>
+                        <div className='flex flex-col md:flex-row md:justify-between md:items-center'>
                             <div className='text-left'>
                                 <h3 className='text-md'>{question.questionText}</h3>
-                                <div className='flex gap-3 items-center mt-2'>
+                                <div className='flex flex-wrap gap-3 items-center mt-2'>
                                     <div className='text-xs text-grayText flex items-center gap-1'>
                                         <TbUserHexagon />
                                         <span>by</span>
@@ -45,7 +45,7 @@ const Question = memo(({ question }: QuestionProps) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className='flex items-center justify-end gap-2'>
+                            <div className='flex items-center justify-between mt-4 md:mt-0 md:justify-end gap-2'>
                                 <div className='text-primaryDark text-sm flex items-center gap-2'>view deatils <BiDownArrowCircle className='text-xl group-data-[open]:rotate-180' /></div>
                                 <DeleteCard pathName='question' id={question._id} tags='allQuestion' />
                             </div>
