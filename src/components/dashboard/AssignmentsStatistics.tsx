@@ -4,11 +4,10 @@ import React, { memo, useMemo } from 'react'
 import Moment from 'react-moment'
 
 interface AssignmentsStatisticsProps {
-    allAssignedExam: any
+    lastCompletedExam: any
 }
 
-const AssignmentsStatistics = memo(({ allAssignedExam }: AssignmentsStatisticsProps) => {
-    const lastCompletedExam = useMemo(() => allAssignedExam.find((exam: any) => exam.status === 'completed'), [allAssignedExam])
+const AssignmentsStatistics = memo(({ lastCompletedExam }: AssignmentsStatisticsProps) => {
     return (
         <>
             <div className='bg-white p-4 px-6 rounded-xl flex-1'>

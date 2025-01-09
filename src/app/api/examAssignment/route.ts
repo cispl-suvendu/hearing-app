@@ -60,13 +60,16 @@ export async function GET(req: Request) {
     // Extract query parameters
     const { searchParams } = new URL(req.url);
     const examId = searchParams.get("examId");
+    const examStatus = searchParams.get("query")
 
     const page = parseInt(searchParams.get("page") || "1", 10); // Default to page 1
     const limit = parseInt(searchParams.get("limit") || "10", 10); // Default to 10 items per page
     const skip = (page - 1) * limit; // Calculate items to skip
 
     // Build query
-    const query = examId ? { examId } : {};
+    const query: any = {}; // Initialize an empty object for the query
+    if (examId) query.examId = examId; // Add examId if present
+    if (examStatus) query.status = examStatus; // Add status if examStatus is present
     // Fetch all assignments
 
     const totalAssignments = await ExamAssignment.countDocuments(query);

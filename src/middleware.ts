@@ -6,8 +6,8 @@ import { NextRequest } from "next/server";
 const SECRET_KEY = process.env.NEXTAUTH_SECRET || "your-secret-key";
 
 const publicRoutes = ["/signin", "/about", "/help", "/api/examAssignment/:id"];
-const adminRoutes = ["/dashboard", "/categories", "/questionnaires", "/user"];
-const apiRoutes = ["/api/category", "/api/exam", "/api/examAssignment", "/api/question", "/api/subCategory", "/api/user"];
+const adminRoutes = ["/dashboard", "/categories", "/questionnaires", "/user", "/assignment"];
+const apiRoutes = ["/api/category", "/api/exam", "/api/examAssignment", "/api/question", "/api/subCategory", "/api/user", "/api/dashboard"];
 
 export async function middleware(req: NextRequest) {
     const cookieStore = await cookies();

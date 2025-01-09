@@ -1,15 +1,14 @@
+'use client'
 import React, { memo, useMemo } from 'react'
 import FilterList from './FilterList'
 import { Suspense } from 'react';
 import Skeleton from '../skeleton';
 
-const Filter = memo(({ allAssignedExam }: any) =>{
-    const completedExams = useMemo(() => allAssignedExam.filter((exam: any) => exam.status === 'completed'), [allAssignedExam]);
-    const inCompletedExams = useMemo(() => allAssignedExam.filter((exam: any) => exam.status === 'assigned'), [allAssignedExam]);
+const Filter = memo(({ allAssignedExam }: any) => {
     return (
         <>
-            <Suspense fallback={<Skeleton />}><FilterList exam={completedExams} title="Completed Assigments" /></Suspense>
-            <Suspense fallback={<Skeleton />}><FilterList exam={inCompletedExams} title="In Progress Assigments" /></Suspense>
+            <Suspense fallback={<Skeleton />}><FilterList count={allAssignedExam.completedAssinment} title="Completed Assigments" link="/assignment?query=completed" /></Suspense>
+            <Suspense fallback={<Skeleton />}><FilterList count={allAssignedExam.inProgressAssinment} title="In Progress Assigments" link="/assignment?query=assigned" /></Suspense>
         </>
     )
 })

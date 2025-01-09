@@ -16,10 +16,11 @@ interface AssignedExamProps {
     },
     setPage: React.Dispatch<React.SetStateAction<number>>,
     setLimit: React.Dispatch<React.SetStateAction<number>>,
-    pageLimit: number
+    pageLimit: number,
+    showPagination:boolean
 }
 
-export default function AssignExamCard({ assignedExam, setPage, setLimit, pageLimit }: AssignedExamProps) {
+export default function AssignExamCard({ assignedExam, setPage, setLimit, pageLimit, showPagination }: AssignedExamProps) {
     return (
         <>
             {assignedExam.data?.length === 0 && assignedExam.success ? <NoItemFound componentName='Assigned Exam' /> :
@@ -62,7 +63,7 @@ export default function AssignExamCard({ assignedExam, setPage, setLimit, pageLi
                             })}
                         </tbody>
                     </table>
-                    {assignedExam.success &&  <TablePagination pagination={assignedExam.pagination} setPage={setPage} setLimit={setLimit} pageLimit={pageLimit} /> }
+                    {assignedExam.success && showPagination &&  <TablePagination pagination={assignedExam.pagination} setPage={setPage} setLimit={setLimit} pageLimit={pageLimit} /> }
                 </div>}
             {!assignedExam.success && !assignedExam.error && <Skeleton />}
         </>
