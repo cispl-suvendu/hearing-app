@@ -6,6 +6,7 @@ import { postAllData } from '@/lib/postAll';
 import toast from 'react-hot-toast';
 import { assignExamInitialValues, assignExamType, assignExamValidation } from '@/formData/assignExam';
 import { useAuthContext } from '@/context/authContext';
+import MultiInput from './multiInput';
 
 interface AssignExamProps {
     exam: IExam,
@@ -46,41 +47,23 @@ export default function AssignExam({ exam, reFetch, closeAddForm }: AssignExamPr
         }
     }
 
+    console.log("formik.values", formik)
+
     return (
         <>
             <form onSubmit={formik.handleSubmit}>
                 <div className='flex justify-between gap-2'>
                     <div className='inptHldr flex-1'>
-                        <input
-                            type="text"
-                            name="userName"
-                            onChange={formik.handleChange}
-                            value={formik.values.userName}
-                            className='inputStyle'
-                            placeholder='Full Name'
-                            onBlur={formik.handleBlur}
-                        />
-                        {formik.touched.userName && formik.errors.userName ? (
-                            <div className='errorMsg'>{formik.errors.userName}</div>
-                        ) : null}
+                        <MultiInput formik={formik} filedName="userName" label="Assignee name" />
                     </div>
                     <div className='inptHldr flex-1'>
-                        <input
-                            type="text"
-                            name="userEmail"
-                            onChange={formik.handleChange}
-                            value={formik.values.userEmail}
-                            className='inputStyle'
-                            placeholder='Email'
-                            onBlur={formik.handleBlur}
-                        />
-                        {formik.touched.userEmail && formik.errors.userEmail ? (
-                            <div className='errorMsg'>{formik.errors.userEmail}</div>
-                        ) : null}
+                        <MultiInput formik={formik} filedName="userEmail" label="Assignee email" />
                     </div>
-                    <div className='btnHldr'>
-                        <button type="submit" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add info' : 'Assign'}</button>
-                    </div>
+                </div>
+                <div className='flex justify-end mt-4'>
+                <div className='btnHldr'>
+                    <button type="button" className='btnPrimary' disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)} onClick={()=>formik.handleSubmit()}>{formik.isSubmitting ? 'Please Wait...' : !(formik.isValid && formik.dirty) ? 'Add info' : 'Assign'}</button>
+                </div>
                 </div>
             </form>
         </>
