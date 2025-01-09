@@ -12,7 +12,7 @@ export const handleSignIn = async (values: signInType) => {
             value: response.data,
             httpOnly: true,
             path: '/',
-            //secure: true,
+            secure: true,
         })
     }
     return response
