@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
         };
 
         const options = {
-            expiresIn: "7d", // Set expiration time to 7 days
+            expiresIn: "15d", // Set expiration time to 7 days
         };
 
         const token = jwt.sign(jwtPayload, SECRET, options);
